@@ -1,0 +1,124 @@
+.App {
+    width : 100%;
+    max-width: 1440px;
+    min-width: 1440px;
+    margin : auto;
+}
+
+.header {
+    width: 100%;
+    height: 60px;
+    border: 5pt groove #3f51b5
+}
+
+.main-section{
+    height: 389px;
+}
+.problem {
+    word-wrap: break-all;
+    background: #838383;
+    color: white;
+    height: 100%;
+    width: 100%;
+}
+.problem-code {
+    flex: 1 1 auto;
+    /* resizable */
+    width: 100%;
+    min-height: 200px;
+    min-width: 200px;
+    background: #eee;
+}
+
+.col-scroll{
+    flex: 0 0 auto;
+    width: 18px;  
+    width:5px;
+    min-height: 200px;
+    cursor: col-resize;  
+    background: yellow;
+}
+.row-scroll{
+    flex: 0 0 auto;
+    height: 5px;
+    background: black;
+    cursor: row-resize;
+}
+.run-section{
+    width: 100%;
+    
+}
+.problem-result{
+    flex: 1 1 auto;
+    /* resizable */
+    min-height: 200px;
+    background: #eee;
+    text-align:justify;
+}
+.footer {
+    width: 100%;
+    height: 50px;
+    border: 5pt groove #3f51b5;
+    position: relative;
+}
+.Resizer {
+  background: #000;
+  opacity: 0.2;
+  z-index: 1;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  background-clip: padding-box;
+}
+ 
+.Resizer:hover {
+  -webkit-transition: all 2s ease;
+  transition: all 2s ease;
+}
+ 
+.Resizer.horizontal {
+  height: 11px;
+  margin: -5px 0;
+  border-top: 5px solid rgba(255, 255, 255, 0);
+  border-bottom: 5px solid rgba(255, 255, 255, 0);
+  cursor: row-resize;
+  width: 100%;
+  
+}
+ 
+.Resizer.horizontal:hover {
+  border-top: 5px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 5px solid rgba(0, 0, 0, 0.5);
+}
+ 
+.Resizer.vertical {
+  width: 11px;
+  margin: 0 -5px;
+  border-left: 5px solid rgba(255, 255, 255, 0);
+  border-right: 5px solid rgba(255, 255, 255, 0);
+  cursor: col-resize;
+}
+ 
+.Resizer.vertical:hover {
+  border-left: 5px solid rgba(0, 0, 0, 0.5);
+  border-right: 5px solid rgba(0, 0, 0, 0.5);
+}
+.Resizer.disabled {
+  cursor: not-allowed;
+}
+.Resizer.disabled:hover {
+  border-color: transparent;
+}
+
+.modal-contents{
+    display: flex;
+}
+
+.modal-retrun{
+    display: flex;
+}
+.modal-dialog {
+    max-width: 750px !important;
+}
