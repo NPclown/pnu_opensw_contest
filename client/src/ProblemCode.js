@@ -12,7 +12,6 @@ import ReactDom from 'react-dom';
 const ProblemCode = (props) =>{
     const height = '300px'
 
-    
     // if(props.go){
     //     <CodeMirror
     //     value='hello'
