@@ -17,7 +17,7 @@ import Axios from 'axios';
 
 function App(props) {
   const [show, setShow] = useState(false);
-  const [go,setGo] = useState(false)
+  const [go,setGo] = useState(true)
   const [index,setIndex] = useState("")
   const [code,setCode] = useState("const")
   const [testCase,setTestCase] = useState("")
@@ -68,10 +68,10 @@ function App(props) {
           </div>
         <SplitPane  split="horizontal" defaultSize={330} minSize={330} >
           <div>소스코드
-            <Button variant="primary" onClick = {() => setGo(true)}>
+            <Button variant="primary" onClick = {() => setCode("")}>
               초기화
             </Button>
-            <ProblemCode go={go} code={code} setCode={(value)=>setCode(value)} ></ProblemCode>          
+            <ProblemCode setGo={setGo} go={go} code={code} setCode={(value)=>setCode(value)} ></ProblemCode>          
           </div>
           <div>소스결과
           </div>
@@ -97,19 +97,3 @@ function App(props) {
 export default App;
 
 
-//       {props.go ? (
-//         <Loading></Loading>
-//       ) : (
-//         state.state ? (
-//           <div className="content">
-//             <Title main={state.data.title} sub={state.data.maker} mobile_main={state.data.title} mobile_sub={state.data.maker}></Title>
-//             <ArtContent image={state.data.img_path} video={state.data.video_path}></ArtContent>
-//             <Comment {...props} id={state.data.id} type={state.data.type}></Comment>
-//           </div>
-//         ) : (
-//           <Redirect to="/error"></Redirect>
-//         )
-//       )}
-//       <Footer {...props} type={false}></Footer>
-// </div>
-// );
