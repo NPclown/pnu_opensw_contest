@@ -3,7 +3,7 @@
     max-width: 1000px;
     min-width: 1000px;
     margin : auto;
-    background-color: beige;
+    background-color: #65648f;
 }
 
 .header {
@@ -128,7 +128,7 @@
 }
 .problem-number{
   position: absolute;
-
+  padding-left: 10px;
 }
 
 .problem-language{

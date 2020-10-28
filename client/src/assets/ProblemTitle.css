@@ -1,0 +1,9 @@
+.problem-title{
+    text-align: center;
+    padding: 5px;
+    border-radius: 25px;
+    border:solid 3px blue;
+    font-weight: 900;
+    /* color:#4232a8 */
+    color:white;
+}

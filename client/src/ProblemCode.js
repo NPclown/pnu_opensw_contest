@@ -4,9 +4,22 @@ import CodeMirror from '@uiw/react-codemirror';
 import 'codemirror/keymap/sublime';
 import 'codemirror/theme/monokai.css';
 
-function ProblemCode() {
+const ProblemCode = (props) =>{
     const code = 'const a = 0;'
     const height = '300px'
+
+    if(props.go){
+        <CodeMirror
+        value='hello'
+        height={height}
+        options={{
+            theme: 'monokai',
+            tabSize: 2,
+            keyMap: 'sublime',
+            mode: 'jsx',
+        }}/>
+    }
+    
     return(
         <div className="problemcode">
             <CodeMirror
