@@ -24,7 +24,11 @@ POST    create      /execution        문제에 대한 테스트 케이스 실�
 채점 관련 API
 POST    create      /submit           문제에 대한 채점 실행
 
-
+```
 docker pull mongo
 
 docker run --name mongodb -d -p 9017:27017 mongo
+```
+```
+docker pull npclown/gcc:2.0 
+```

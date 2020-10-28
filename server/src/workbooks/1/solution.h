@@ -1,0 +1,1 @@
+long long solution(int a, int b);
