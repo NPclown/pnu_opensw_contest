@@ -27,7 +27,7 @@ function App(props) {
   const handleShow = () => setShow(true);
 
   const toBackEnd = async(e,language,testCase,code,index) => {
-    console.log(code)
+    console.log(language)
     e.preventDefault()
     var result;
         try{
@@ -45,7 +45,7 @@ function App(props) {
         <span className = "problem-number">
         <ButtonToolbar aria-label="Toolbar with button groups">
           <ButtonGroup className="mr-2" aria-label="First group">
-            <Button setIndex={()=>setIndex(1)}>1</Button> <Button setIndex={()=>setIndex(2)}>2</Button>
+            <Button onClick={()=>setIndex(1)}>1</Button> <Button onClick={()=>setIndex(2)}>2</Button>
           </ButtonGroup>
         </ButtonToolbar>
         </span>
