@@ -6,10 +6,12 @@ function TestCaseModal(props) {
 
     // handle input change
     const handleInputChange = (e, index) => {
+        e.preventDefault()
       const { name, value } = e.target;
       const list = [...inputList];
       list[index][name] = value;
       setInputList(list);
+      props.setTestCase(inputList)
     };
     
     // handle click event of the Remove button
@@ -17,6 +19,7 @@ function TestCaseModal(props) {
       const list = [...inputList];
       list.splice(index, 1);
       setInputList(list);
+      props.setTestCase(list)
     };
     
     // handle click event of the Add button
@@ -24,9 +27,9 @@ function TestCaseModal(props) {
       setInputList([...inputList, { firstName: "", lastName: "" ,returnName:""}]);
     };
   
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);  
+    //
+
+
     return(
         <div className="TestCaseModal">
             <Modal show={props.show} onHide={props.handleClose}>
@@ -72,7 +75,7 @@ function TestCaseModal(props) {
       </Modal.Body>
       <Modal.Footer>
         {/* <Button variant="primary" onClick={e => handleAddClick(e)}>Add</Button> */}
-        <Button variant="secondary" onClick={props.handleClose} >Close</Button>
+        <Button variant="secondary" onClick={()=>props.handleClose(false)} >Close</Button>
       </Modal.Footer>
       </Modal>
       </div>

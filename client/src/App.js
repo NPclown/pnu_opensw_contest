@@ -9,14 +9,34 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import {Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+import ReactDom from 'react-dom';
 import Problem from './Problem';
 import ProblemTitle from './component/ProblemTitle'
 import ProblemLanguage from './component/ProblemLanguage'
-function App() {
+import Axios from 'axios';
+
+function App(props) {
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);  
   const [go,setGo] = useState(false)
+  const [index,setIndex] = useState("")
+  const [code,setCode] = useState("const")
+  const [testCase,setTestCase] = useState("")
+  const [language,setLanguage] = useState("")
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const toBackEnd = async(e,language,testCase,code,index) => {
+    console.log(code)
+    e.preventDefault()
+    var result;
+        try{
+            result = await Axios.post(`/api/toBackEnd`,{language : language, 
+            testCase: testCase, code:code, index:index});
+        } catch(error) {
+            alert(error)
+        }
+    }
 
   return (
     <div className="App">
@@ -25,12 +45,12 @@ function App() {
         <span className = "problem-number">
         <ButtonToolbar aria-label="Toolbar with button groups">
           <ButtonGroup className="mr-2" aria-label="First group">
-            <Button>1</Button> <Button>2</Button>
+            <Button setIndex={()=>setIndex(1)}>1</Button> <Button setIndex={()=>setIndex(2)}>2</Button>
           </ButtonGroup>
         </ButtonToolbar>
         </span>
         <div className = "problem-language">
-          <ProblemLanguage></ProblemLanguage>
+          <ProblemLanguage setLanguage={setLanguage}></ProblemLanguage>
           </div>
       </div>
 
@@ -51,26 +71,27 @@ function App() {
             <Button variant="primary" onClick = {() => setGo(true)}>
               초기화
             </Button>
-            <ProblemCode go={go} ></ProblemCode>          
+            <ProblemCode go={go} code={code} setCode={(value)=>setCode(value)} ></ProblemCode>          
           </div>
           <div>소스결과
           </div>
         </SplitPane>
         </SplitPane>
       </div>
+
     <div className="footer">
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary" onClick={()=>handleShow(true)}>
         테스트 케이스 추가하기
       </Button>
-
     </div>
-      <TestCaseModal show={show} handleClose={handleClose} handleShow={handleShow}></TestCaseModal>
-
+      <TestCaseModal show={show} handleClose={handleClose} handleShow={handleShow} 
+       setTestCase={setTestCase}>
+      </TestCaseModal>
+      <Button variant="primary" onClick={e => toBackEnd(e,language,testCase,code,index)}>
+        채점 및 제출 
+      </Button>
     </div>
     
   );
 }
-
 export default App;
-
-
