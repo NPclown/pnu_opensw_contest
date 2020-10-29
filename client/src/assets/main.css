@@ -1,7 +1,5 @@
 .App {
     width : 100%;
-    max-width: 1000px;
-    min-width: 1000px;
     margin : auto;
     background-color: #d9e7ff;
     border: groove 5px #d9e7ff;
@@ -26,8 +24,6 @@
 }
 .main-section{
     height: 500px;
-    max-width: 1000px;
-    min-width: 1000px;
     width: 100%;
     padding-top: 5px;
 }
@@ -62,7 +58,6 @@
 }
 .run-section{
     width: 100%;
-    
 }
 .problem-result{
     flex: 1 1 auto;
@@ -152,13 +147,14 @@
 }
 
 .send{
-  margin-left:650px;
+  margin-left:900px;
 }
 
 .codestyle{
   color:#494c52;
   padding-left:10px;
+  font-weight: 700;
 }
 .reset-button{
-  margin-left:600px;
+  margin-left: 10px;
 }

@@ -11,7 +11,7 @@ import ReactDom from 'react-dom';
 
 const ProblemCode = (props) =>{
 
-
+    const height = "120px"
                                                                     
     // if(props.go){
     //     <CodeMirror
@@ -32,6 +32,8 @@ const ProblemCode = (props) =>{
                 onChange={(editor,data,value)=>{
                     props.setCode(value)
                 }}
+                height={height}
+
                 options={{
                 theme: 'lucario',
                 tabSize: 2,

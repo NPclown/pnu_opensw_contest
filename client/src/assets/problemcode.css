@@ -1,5 +1,8 @@
 .problemcode{
-    width:95%;
+    width:98%;
     position: absolute;
-    min-height: 200px;
+}
+.problem-scroll{
+    overflow-y: scroll;
+    height: 100%;
 }
