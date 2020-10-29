@@ -1,8 +1,8 @@
 // ENV
 require('dotenv').config();
+
 // DEPENDENCIES
 const express = require('express');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
 
@@ -16,15 +16,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// // Node.js의 native Promise 사용
-// mongoose.Promise = global.Promise;
-
-// // CONNECT TO MONGODB SERVER
-// mongoose.connect(process.env.MONGO_URI, { useMongoClient: true })
-//   .then(() => console.log('Successfully connected to mongodb'))
-//   .catch(e => console.error(e));
-
-app.use("/", require('./src/routes/docker'));
+app.use("/api", require('./src/routes/index.js'));
+app.use("/run", require('./src/routes/docker.js'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

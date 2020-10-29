@@ -53,6 +53,7 @@ const containerLogs = (container) => {
 }
   
 router.post('/execution', (req, res, next) =>{
+    console.log(req.body);
     let options = {
         Image: "npclown/gcc:2.0", //req.body.containerImage
         AttachStdin: false,
@@ -75,7 +76,7 @@ router.post('/execution', (req, res, next) =>{
 
 
     //파일 생성 SourceCode / Input / Output
-    var code = '#include <stdio.h>\n#include <stdbool.h>\n#include <stdlib.h>\nlong long solution(int a, int b) {\nlong long answer = 0;\nreturn answer;\n}'
+    var code = req.body.code;
     var language = "c"
     var testcase = ""
     makeFile(tmp_dir,language,code,testcase);
