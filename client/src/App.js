@@ -45,7 +45,7 @@ function App(props) {
         <span className = "problem-number">
         <ButtonToolbar aria-label="Toolbar with button groups">
           <ButtonGroup className="mr-2" aria-label="First group">
-            <Button onClick={()=>setIndex(1)}>1</Button> <Button onClick={()=>setIndex(2)}>2</Button>
+            <Button variant="outline-dark" onClick={()=>setIndex(1)}>1</Button> <Button variant="outline-dark" onClick={()=>setIndex(2)}>2</Button>
           </ButtonGroup>
         </ButtonToolbar>
         </span>
@@ -66,30 +66,32 @@ function App(props) {
             a와 b는 -10,000,000 이상 10,000,000 이하인 정수입니다.
             a와 b의 대소관계는 정해져있지 않습니다.
           </div>
-        <SplitPane  split="horizontal" defaultSize={330} minSize={330} >
-          <div>소스코드
-            <Button variant="primary" onClick = {() => setCode("")}>
+        <SplitPane  split="horizontal" defaultSize={350} minSize={350} >
+          <div className="codestyle">소스코드
+            <Button variant="dark" className="reset-button"onClick = {() => setCode("")}>
               초기화
             </Button>
             <ProblemCode setGo={setGo} go={go} code={code} setCode={(value)=>setCode(value)} ></ProblemCode>          
           </div>
-          <div>소스결과
+          <div className="codestyle">소스결과
           </div>
         </SplitPane>
         </SplitPane>
       </div>
 
     <div className="footer">
-      <Button variant="primary" onClick={()=>handleShow(true)}>
+      <Button variant="secondary" onClick={()=>handleShow(true)}>
         테스트 케이스 추가하기
       </Button>
-    </div>
+      <Button className="send" variant="secondary" onClick={e => toBackEnd(e,language,testCase,code,index)}>
+        채점 및 제출 
+      </Button>
       <TestCaseModal show={show} handleClose={handleClose} handleShow={handleShow} 
        setTestCase={setTestCase}>
       </TestCaseModal>
-      <Button variant="primary" onClick={e => toBackEnd(e,language,testCase,code,index)}>
-        채점 및 제출 
-      </Button>
+
+      </div>
+
     </div>
     
   );
