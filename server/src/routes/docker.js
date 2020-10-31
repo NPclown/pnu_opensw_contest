@@ -6,6 +6,11 @@ const cryptoRandomString = require('crypto-random-string');
 const stream = require('stream');
 const async = require('async');
 const rimraf = require('rimraf');
+const low = require('lowdb')
+const FileSync = require('lowdb/adapters/FileSync');
+const { SSL_OP_EPHEMERAL_RSA } = require('constants');
+const adapter = new FileSync('db.json')
+const db = low(adapter)        
 
 const docker = new Docker({
     socketPath: '/var/run/docker.sock'
@@ -17,8 +22,24 @@ const makeFolder = (dir) => {
     }
 }
 
-const makeFile = (dir, language, code, testcase) => {
-    fs.writeFileSync(`${dir}/solution.c`,code,'utf8');
+const makeFile = (dir, language, code) => {
+    switch(language){
+        case '1':
+            fs.writeFileSync(`${dir}/solution.c`,code,'utf8');
+            break;
+        case '2':
+            fs.writeFileSync(`${dir}/solution.cpp`,code,'utf8');
+            break;
+        case '3':
+            fs.writeFileSync(`${dir}/solution.py`,code,'utf8');
+            break;
+        case '4':
+            fs.writeFileSync(`${dir}/solution.py`,code,'utf8');
+            break;
+        case '5':
+            fs.writeFileSync(`${dir}/solution.java`,code,'utf8');
+            break;
+    }
 }
 
 const containerLogs = (container) => {
@@ -51,11 +72,96 @@ const containerLogs = (container) => {
         });
     })
 }
-  
-router.post('/execution', (req, res, next) =>{
-    console.log(req.body);
+
+const dockerCreate = (tmp_dir, options, index) => {
+    return new Promise((resolve, reject)=>{
+        docker.createContainer(options, function(err, container) {
+            container.start({}, async function(err, data) {
+                var logs = await containerLogs(container);
+                var state = await container.inspect();
+                await container.remove();
+
+                if(index == undefined){
+                    resolve({
+                        state : state.State.ExitCode,
+                        result : { 
+                            "prints" : logs
+                        }
+                    })
+                }else{
+                    var result = fs.readFileSync(`${tmp_dir}/${index}.rst`,'utf-8').split('\n');
+
+                    resolve({
+                        result : { 
+                            "input" : result[0],
+                            "output" : result[1],
+                            "result" : result[2],
+                            "prints" : logs
+                        }
+                    })
+                }
+            });
+        });
+    })
+}
+
+// 언어별 도커 이미지 선택
+const languageSelect = (language) => {
+    return new Promise((resolve,reject) => {
+        var dockerImage;
+        switch(language){
+            case '1':   //c
+            case '2':   //cpp
+            case '3':   //python
+            case '4':   //python3
+                dockerImage = 'npclown/gcc:2.0'
+                break;
+            case '5':   //java
+                dockerImage = 'npclown/java:1.0'
+                break;
+            default:    //none
+                dockerImage = null
+        }
+        resolve(dockerImage);
+    })
+}
+
+// 채점 소스코드 셋팅
+const languageSetting = (language, tmp_dir, id) => {
+    switch(language){
+        case '1':
+            fs.writeFileSync(`${tmp_dir}/main.c`,db.get('workbook').find({id: id}).get('code').get('main').get('c').value());
+            fs.writeFileSync(`${tmp_dir}/solution.h`,db.get('workbook').find({id: id}).get('code').get('header').get('c').value());
+            break;
+        case '2':
+            fs.writeFileSync(`${tmp_dir}/main.cpp`,db.get('workbook').find({id: id}).get('code').get('main').get('cpp').value());
+            fs.writeFileSync(`${tmp_dir}/solution.h`,db.get('workbook').find({id: id}).get('code').get('header').get('cpp').value());
+            break;
+        case '3':
+            fs.writeFileSync(`${tmp_dir}/main.py`,db.get('workbook').find({id: id}).get('code').get('main').get('python').value());
+            break;
+        case '4':
+            fs.writeFileSync(`${tmp_dir}/main.py`,db.get('workbook').find({id: id}).get('code').get('main').get('python3').value());
+            break;
+        case '5':
+            fs.writeFileSync(`${tmp_dir}/main.java`,db.get('workbook').find({id: id}).get('code').get('main').get('java').value());
+            break;
+    }
+}
+
+router.post('/execution', async(req, res, next) =>{
+    //임시 폴더 생성
+    const tmp_dir = __dirname+"/../tmp/"+cryptoRandomString({length:16});
+    makeFolder(tmp_dir);
+    makeFolder(`${tmp_dir}/testcase`);
+
+    //기본 소스코드 셋팅하기
+    languageSetting('1',tmp_dir,'1');
+    makeFile(tmp_dir,'1',req.body.code);
+
+    // docker options
     let options = {
-        Image: "npclown/gcc:2.0", //req.body.containerImage
+        Image: await languageSelect('1'),
         AttachStdin: false,
         AttachStdout: true,
         AttachStderr: true,
@@ -65,22 +171,6 @@ router.post('/execution', (req, res, next) =>{
         }
     };
 
-    //임시 폴더 생성
-    const tmp_dir = __dirname+"/../tmp/"+cryptoRandomString({length:16});
-    makeFolder(tmp_dir);
-
-    //기본 파일 복사하기
-    fs.copyFileSync(__dirname+"/../workbooks/1/main.c",tmp_dir+"/main.c");
-    fs.copyFileSync(__dirname+"/../workbooks/1/solution.h",tmp_dir+"/solution.h");
-    fs.copyFileSync(__dirname+"/../workbooks/1/score.txt",tmp_dir+"/score.txt");
-
-
-    //파일 생성 SourceCode / Input / Output
-    var code = req.body.code;
-    var language = "c"
-    var testcase = ""
-    makeFile(tmp_dir,language,code,testcase);
-
     // volume
     var src = tmp_dir;
     var dis = "/tmp";
@@ -89,35 +179,27 @@ router.post('/execution', (req, res, next) =>{
         'Binds': [src + ':' + dis]
     }
 
-    options.Cmd = ['/bin/bash', '-c', 'cd tmp; gcc -o main.out *.c && ./main.out'];
+    //complie
+    options.Cmd = ['/bin/bash', '-c', `cd tmp; gcc -o main.out *.c`];
+    var compile = await dockerCreate(tmp_dir,options);
+
+    if(compile.result.state != 0){
+        res.send(compile)
+    }else{
+        var result = [];
+        var testcase = req.body.testcase;
     
-    docker.createContainer(options, function(err, container) {
-        container.start({}, async function(err, data) {
-            var logs = await containerLogs(container);
-            var state = await container.inspect();
-            // await container.remove();
-            // rimraf.sync(tmp_dir);
-
-            var test = fs.readFileSync(`${tmp_dir}/result.txt`, 'utf8').split("\n");
-
-            var tmp = []
-            for (var i = 0; i < parseInt(test.length / 3); i++){
-                tmp.push({ 
-                    "input" : test[i*3],
-                    "output" : test[i*3+1],
-                    "result" : test[i*3+2],
-                    "prints" : logs
-                })
-            }
-            console.log(test.length/3);
-            var result = {
-                state : state.State.ExitCode,
-                results : tmp
-            }
-
-            res.send(result)
-        });
-    });
+        //execute
+        for (var index = 0; index < testcase.length; index++){
+            fs.writeFileSync(`${tmp_dir}/testcase/${index}.in`,testcase[index].input);
+            fs.writeFileSync(`${tmp_dir}/testcase/${index}.out`,testcase[index].output);
+            options.Cmd = ['/bin/bash', '-c', `cd tmp; ./main.out testcase/${index}.in testcase/${index}.out ${index}.rst`];
+            var execute = await dockerCreate(tmp_dir,options, index);
+            result.push(execute)
+        }
+        rimraf.sync(tmp_dir);
+        res.send(result)
+    }
 });
 
 module.exports = router;
