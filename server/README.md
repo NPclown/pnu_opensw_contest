@@ -23,7 +23,7 @@
 | HTTP verbs | Route  | CRUD|
 | ----------- |----------- |----------- |
 | GET  		| /api/workbooks       				| 모든 문제 리스트 조회 | 
-| POST   		| /api/workbooks/:workbooks_id      	| 특정 문제 조회 |
+| GET   		| /api/workbooks/:workbooks_id      	| 특정 문제 조회 |
 | POST  		| /api/workbooks       				| 신규 문제 등록 | 
 | PATCH  	| /api/workbooks/:workbooks_id      	| 특정 문제 수정 / 갱신 |
 | DELETE 	| /api/workbooks       				| 모든 문제 삭제 | 
@@ -165,7 +165,7 @@ DELETE http://localhost:5000/api/workbooks/3
 
 #### 문제에 대한 테스트 케이스 실행 (아직 제대로 구현 안됨, 에러 처리 안함, C만 실행됨)
 ```
-DELETE http://localhost:5000/run/execution
+POST http://localhost:5000/run/execution
 
 {
     "index": "1",
