@@ -8,6 +8,7 @@ const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 4500;
+const mongoose = require('mongoose');
 
 // Static File Service
 app.use(express.static('public'));
@@ -37,4 +38,7 @@ app.use(function (err, req, res, next) {
     res.send(err);
 });
 
+mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true,useUnifiedTopology: true}, () =>{
+    console.log('connected to DB!');
+})
 app.listen(port, () => console.log(`Server listening on port ${port}`));

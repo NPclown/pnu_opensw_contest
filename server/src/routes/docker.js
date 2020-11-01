@@ -8,8 +8,6 @@ const async = require('async');
 const rimraf = require('rimraf');
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync');
-const { SSL_OP_EPHEMERAL_RSA } = require('constants');
-const { exec } = require('child_process');
 const adapter = new FileSync('db.json')
 const db = low(adapter)        
 
