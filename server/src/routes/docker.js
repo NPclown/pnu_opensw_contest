@@ -353,7 +353,7 @@ router.post('/score', async(req, res, next) =>{
                     }
                     execute_result.push(execute)
                 }
-                // rimraf.sync(tmp_dir);
+                rimraf.sync(tmp_dir);
                 res.json({
                     statue : 0,
                     score : (count*100/scoreCase.length).toFixed(1),
@@ -385,7 +385,7 @@ router.post('/score', async(req, res, next) =>{
                 }
                 execute_result.push(execute)
             }
-            // rimraf.sync(tmp_dir);
+            rimraf.sync(tmp_dir);
             res.json({
                 statue : 0,
                 score : (count*100/scoreCase.length).toFixed(1),
