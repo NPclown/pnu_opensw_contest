@@ -1,6 +1,7 @@
-var mongoose = require('mongoose')
+const mongoose = require('mongoose')
 
-var workbookSchema = mongoose.Schema({
+const workbookSchema = mongoose.Schema({
+  id: String,
   name: String,
   cont: String,
   inits: {
