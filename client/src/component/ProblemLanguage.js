@@ -5,15 +5,16 @@ import Collapse from 'react-bootstrap/Collapse'
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import { Link } from 'react-router-dom';
 
 const ProblemLanguage = (props) =>{
     const [checked, setChecked] = useState(false);
     const [radioValue, setRadioValue] = useState('1');
     const radios = [
-        { name: 'c', value: '1' },
-        { name: 'cpp', value: '2' },
-        { name: 'Python', value: '3' },
-        { name: 'Python3', value: '4' },
+        { name: 'c', value: 1 },
+        { name: 'cpp', value: 2 },
+        { name: 'python', value: 3 },
+        { name: 'python3', value: 4 },
       ];
     return(
        <>
@@ -28,14 +29,16 @@ const ProblemLanguage = (props) =>{
               checked={radioValue === radio.value}
               onChange={(e) => setRadioValue(e.currentTarget.value)
             }
-            onClick={()=>props.setLanguage(radios[idx].value)}
+            onClick={()=>props.setLanguage(radios[idx].name)}
             >
               {radio.name}
             </ToggleButton>
           ))}
         </ButtonGroup>
       </>
+    
     )
+    
 }
 export default ProblemLanguage;
 

@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import Axios from 'axios';
-import './assets/problemcode.css'
+import '../assets/problemcode.css'
 import { commands } from 'codemirror';
 
 function Problem(props){
