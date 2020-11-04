@@ -16,6 +16,7 @@ import ProblemLanguage from './component/ProblemLanguage'
 import Axios from 'axios';
 
 function App(props) {
+
   const [show, setShow] = useState(false);
   const [go,setGo] = useState(true)
   const [index,setIndex] = useState("")
@@ -37,6 +38,8 @@ function App(props) {
             alert(error)
         }
     }
+
+
 
   return (
     <div className="App">
@@ -74,16 +77,19 @@ function App(props) {
       </div>
 
     <div className="footer">
+      <div className="addtestcase">
       <Button variant="secondary" onClick={()=>handleShow(true)}>
         테스트 케이스 추가하기
       </Button>
-      <Button className="send" variant="secondary" onClick={e => toBackEnd(e,language,testCase,code,index)}>
+      </div>
+      <div className="send">
+      <Button variant="secondary" onClick={e => toBackEnd(e,language,testCase,code,index)}>
         채점 및 제출 
       </Button>
       <TestCaseModal show={show} handleClose={handleClose} handleShow={handleShow} 
        setTestCase={setTestCase}>
       </TestCaseModal>
-
+      </div>
       </div>
 
     </div>

@@ -10,9 +10,10 @@ const ProblemLanguage = (props) =>{
     const [checked, setChecked] = useState(false);
     const [radioValue, setRadioValue] = useState('1');
     const radios = [
-        { name: 'C', value: '1' },
-        { name: 'Python', value: '2' },
-        { name: 'Java', value: '3' },
+        { name: 'c', value: '1' },
+        { name: 'cpp', value: '2' },
+        { name: 'Python', value: '3' },
+        { name: 'Python3', value: '4' },
       ];
     return(
        <>
