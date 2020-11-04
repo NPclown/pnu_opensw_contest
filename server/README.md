@@ -91,6 +91,16 @@ GET http://localhost:5000/api/workbooks/1
                 "cpp": "#include <string>\n#include <vector>\n\nusing namespace std;\n\nlong long solution(int a, int b) {\n    long long answer = 0;\n    return answer;\n}",
                 "python": "def solution(a, b):\n    answer = 0\n    return answer",
                 "python3": "def solution(a, b):\n    answer = 0\n    return answer"
+            },
+            "sample": {
+                "testcase": [
+                    {
+                        "_id": "5fa2b68d1f94700b1235e632",
+                        "input": "3 4",
+                        "output": "7"
+                    }
+                ],
+                "schema": "a(int) b(int)"
             }
         }
     }

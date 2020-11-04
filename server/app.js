@@ -56,6 +56,7 @@ mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true,useUnifiedTopolog
                 tmp.inits = item.inits;
                 tmp.code = item.code;
                 tmp.score = item.score;
+                tmp.sample = item.sample;
                 await tmp.save();
             })
         }
