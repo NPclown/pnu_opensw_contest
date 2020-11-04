@@ -11,6 +11,7 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import {Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import ReactDom from 'react-dom';
 import Problem from './Problem';
+import ProblemResult from './ProblemResult';
 import ProblemTitle from '../component/ProblemTitle'
 import ProblemLanguage from '../component/ProblemLanguage'
 import Axios from 'axios';
@@ -33,23 +34,24 @@ function Home(props) {
 
   const [show, setShow] = useState(false);
   const [go,setGo] = useState(true)
-  const [index,setIndex] = useState("")
+  const [id,setId] = useState("")
   const [code,setCode] = useState("")
-  const [testCase,setTestCase] = useState("")
+  const [testcase,setTestCase] = useState("")
   const [language,setLanguage] = useState("c")
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const toBackEnd = async(e,language,testCase,code,index) => {
+  const toBackEnd = async(e,language,testcase,code,id) => {
     e.preventDefault()
     var result;
         try{
-            result = await Axios.post(`/api/toBackEnd`,{language : language, 
-            testCase: testCase, code:code, index:index});
+            result = await Axios.post(`/run/score`,{id : id, 
+                language:language, code:code, testcase:testcase});
         } catch(error) {
             alert(error)
         }
     }
+
     console.log(code)
 
     return state.isLoading ? (
@@ -63,7 +65,7 @@ function Home(props) {
         <span className = "problem-number">
         <ButtonToolbar aria-label="Toolbar with button groups">
           <ButtonGroup className="mr-2" aria-label="First group">
-            <Button variant="outline-dark" onClick={()=>setIndex(1)}>1</Button> <Button variant="outline-dark" onClick={()=>setIndex(2)}>2</Button>
+            <Button variant="outline-dark" onClick={()=>setId(1)}>1</Button> <Button variant="outline-dark" onClick={()=>setId(2)}>2</Button>
           </ButtonGroup>
         </ButtonToolbar>
         </span>
@@ -76,26 +78,20 @@ function Home(props) {
         <SplitPane split="vertical" height="80%" defaultSize={350}  minSize={50}>
           <div className= "problem">
             <ProblemTitle main={"문제 설명"}></ProblemTitle>
-              <Problem cont={state.data.cont}></Problem>
+            <Problem cont={state.data.cont}></Problem>
           </div>
         <SplitPane  split="horizontal" defaultSize={350} minSize={350} >
-          <div className="codestyle">소스코드
-            <Button variant="dark" className="reset-button"onClick = {e => {setCode("");alert("초기화")}}>
-              초기화
-            </Button>
-            <ProblemCode inits={state.data.inits[language]} setGo={setGo} go={go} code={code} setCode={(value)=>setCode(value)} ></ProblemCode>          
-          </div>
-          <div className="codestyle">소스결과</div>
+        <ProblemCode inits={state.data.inits[language]} setGo={setGo} go={go} code={code} setCode={(value)=>setCode(value)} ></ProblemCode>          
+        <ProblemResult></ProblemResult>
         </SplitPane>
         </SplitPane>
       </div>
-
     <div className="footer">
       <div className="addtestcase">
       <Button variant="secondary" onClick={()=>handleShow(true)}>
         테스트 케이스 추가하기
       </Button>
-      <Button className="send" variant="secondary" onClick={e => {toBackEnd(e,language,testCase,code,index); alert("제출완료")}}>
+      <Button className="send" variant="secondary" onClick={e => {toBackEnd(e,id,code,testcase); alert("제출완료")}}>
         채점 및 제출 
       </Button>
       </div>
