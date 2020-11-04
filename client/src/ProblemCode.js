@@ -8,40 +8,25 @@ import 'codemirror/mode/javascript/javascript'
 import 'codemirror/keymap/sublime'
 import 'codemirror/lib/codemirror.css'
 import ReactDom from 'react-dom';
-
+import Axios from 'axios'
 const ProblemCode = (props) =>{
 
     const height = "120px"
                                                                     
-    // if(props.go){
-    //     <CodeMirror
-    //     value='hello'
-    //     height={height}
-    //     options={{
-    //         theme: 'monokai',
-    //         tabSize: 2,
-    //         keyMap: 'sublime',
-    //         mode: 'jsx',
-    //     }}/>
-    // } //초기화 버튼 눌렀을 시
-    
     return(
         <div className="problemcode">
             <CodeMirror
-            value={props.code}
+            value={props.inits}
                 onChange={(editor,data,value)=>{
                     props.setCode(value)
                 }}
                 height={height}
-
                 options={{
                 theme: 'lucario',
                 tabSize: 2,
                 lineNumbers:true,
                 mode: 'jsx',
-                keyMap: 'sublime',
-
-                
+                keyMap: 'sublime',                
             }}
             />
         </div>

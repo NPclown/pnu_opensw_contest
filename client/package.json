@@ -46,5 +46,5 @@
   "devDependencies": {
     "@types/codemirror": "0.0.98"
   },
-  "proxy" : "http://127.0.0.1:5000"
+  "proxy" : "http://164.125.234.232:5000"
 }

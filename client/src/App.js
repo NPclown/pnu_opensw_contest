@@ -17,13 +17,25 @@ import Axios from 'axios';
 
 function App(props) {
 
+  const [state,setState]=useState({data:{}, isLoading:true})
+  useEffect(() => {
+      const getData = async() => {
+          try{
+              var result = await Axios.get(`/api/workbooks/1`);
+              setState({data : result.data.data.items, isLoading:false})
+          } catch(error) {
+              alert(error)
+              setState({data : {}, isLoading:true})
+          }
+      }
+      getData();
+  },[])
   const [show, setShow] = useState(false);
   const [go,setGo] = useState(true)
   const [index,setIndex] = useState("")
   const [code,setCode] = useState("const")
   const [testCase,setTestCase] = useState("")
   const [language,setLanguage] = useState("")
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -39,12 +51,14 @@ function App(props) {
         }
     }
 
-
-
-  return (
-    <div className="App">
+    return state.isLoading ? (
+      <div className="loading">
+          <div>로딩중</div>
+      </div>
+      )  :(
+      <div className="App">
       <div className="header">
-        문제이름
+        {state.data.name}
         <span className = "problem-number">
         <ButtonToolbar aria-label="Toolbar with button groups">
           <ButtonGroup className="mr-2" aria-label="First group">
@@ -61,17 +75,16 @@ function App(props) {
         <SplitPane split="vertical" height="80%" defaultSize={350}  minSize={50}>
           <div className= "problem">
             <ProblemTitle main={"문제 설명"}></ProblemTitle>
-              <Problem></Problem>
+              <Problem cont={state.data.cont}></Problem>
           </div>
         <SplitPane  split="horizontal" defaultSize={350} minSize={350} >
           <div className="codestyle">소스코드
             <Button variant="dark" className="reset-button"onClick = {() => setCode("")}>
               초기화
             </Button>
-            <ProblemCode setGo={setGo} go={go} code={code} setCode={(value)=>setCode(value)} ></ProblemCode>          
+            <ProblemCode inits={state.data.inits.c} setGo={setGo} go={go} code={code} setCode={(value)=>setCode(value)} ></ProblemCode>          
           </div>
-          <div className="codestyle">소스결과
-          </div>
+          <div className="codestyle">소스결과</div>
         </SplitPane>
         </SplitPane>
       </div>
@@ -82,18 +95,16 @@ function App(props) {
         테스트 케이스 추가하기
       </Button>
       </div>
-      <div className="send">
-      <Button variant="secondary" onClick={e => toBackEnd(e,language,testCase,code,index)}>
+      <Button className="send" variant="secondary" onClick={e => {toBackEnd(e,language,testCase,code,index); alert("제출완료")}}>
         채점 및 제출 
       </Button>
       <TestCaseModal show={show} handleClose={handleClose} handleShow={handleShow} 
        setTestCase={setTestCase}>
       </TestCaseModal>
       </div>
-      </div>
 
     </div>
-    
+      
   );
 }
 export default App;
