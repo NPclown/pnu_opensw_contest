@@ -18,7 +18,7 @@ function Home(props) {
     const [go,setGo] = useState(true)
     const [id,setId] = useState("1")
     const [code,setCode] = useState("")
-    const [testcase,setTestCase] = useState()
+    const [testcase,setTestCase] = useState([])
     const [language,setLanguage] = useState({name:"c",value:1})
     const [result,setResult] = useState({data:{}, isLoading:true})
     const [resultT,setResultT] = useState({data:{}, isLoading:true})

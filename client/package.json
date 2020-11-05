@@ -15,6 +15,7 @@
     "react-codemirror": "^1.0.0",
     "react-codemirror2": "^7.2.1",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
     "react-split-pane": "^0.1.92",
     "web-vitals": "^0.2.4"
@@ -46,5 +47,5 @@
   "devDependencies": {
     "@types/codemirror": "0.0.98"
   },
-  "proxy" : "http://164.125.234.232:5000"
+  "proxy": "http://localhost:5000"
 }
