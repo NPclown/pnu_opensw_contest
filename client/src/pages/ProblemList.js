@@ -3,7 +3,7 @@ import Axios from 'axios'
 import '../assets/problemList.css'
 import { Link , Redirect} from 'react-router-dom';
 import Table from 'react-bootstrap/Table'
-
+import Button from 'react-bootstrap/Button'
 function ProblemList(props) {
 
     const [state,setState]=useState({data:{}, isLoading:true})
@@ -30,8 +30,10 @@ function ProblemList(props) {
         <div className="App">
             <div className="header">
                 문제 목록
+                <Button className="add-button" variant="secondary">
+                    문제추가
+                </Button>
             </div>  
-            
             <Table striped bordered hover size="sm">
                 <thead>
                     <tr>

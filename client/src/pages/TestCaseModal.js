@@ -45,15 +45,17 @@ function TestCaseModal(props) {
                     </tr>
                 </thead>
                 {props.sample.testcase.map((testcase, index)=>{
-              return(
-                <tbody>
-                    <tr>
-                    <td>{testcase.input}</td>
+                return(
+                    <tbody>
+                        <tr>
+                        <td>{testcase.input}</td>
                     <td>{testcase.output}</td>
                     </tr>
                 </tbody>
                 )   
-                })}                
+                }
+                )} 
+                               
                 </Table>
 
             {inputList.map((x, i) => {

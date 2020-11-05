@@ -6,8 +6,6 @@ import { Button} from 'react-bootstrap';
 import TestCaseModal from './TestCaseModal';
 import ProblemCode from './ProblemCode';
 import TestcaseResult from './TestcaseResult';
-import ButtonGroup from 'react-bootstrap/ButtonGroup'
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import Problem from './Problem';
 import ProblemResult from './ProblemResult';
 import ProblemTitle from '../component/ProblemTitle'
@@ -49,11 +47,14 @@ function Home(props) {
             result3 = await Axios.post(`/run/execution`,{id : id, 
                 language:language.value, code:code, testcase:testcase});
             setResultT({data: result3.data.data.items, isLoading:false})
+            setResult({data: {},isLoading:true})
+
         } catch(error) {
             alert(error)
         }
         console.log(resultT)
     }
+
     const toBackEnd2 = async(e,id,language,code) => {
         e.preventDefault()
         var result2;
@@ -61,6 +62,8 @@ function Home(props) {
                 result2 = await Axios.post(`/run/score`,{id : id, 
                     language:language.value, code:code});
                 setResult({data: result2.data.data.items,isLoading:false})
+                setResultT({data: {},isLoading:true})
+
             } catch(error) {
                 alert(error)
             }

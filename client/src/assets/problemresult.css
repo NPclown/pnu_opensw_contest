@@ -3,5 +3,5 @@
     overflow-y: scroll;
 } */
 .top-line{
-    border-top: solid 2px;    
+    border-top: dashed 2px;  
 }

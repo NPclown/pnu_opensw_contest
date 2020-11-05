@@ -25,7 +25,7 @@ const ProblemCode = (props) =>{
                 </Button>
             </div>
             <CodeMirror
-                value={props.code}
+                value={props.inits}
                 onChange={(editor,data,value)=>{
                     props.setCode(value.replace(/\n/ig, '\n'))
                 }}
