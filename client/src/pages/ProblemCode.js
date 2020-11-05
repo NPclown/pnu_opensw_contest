@@ -12,14 +12,15 @@ import 'codemirror/mode/xml/xml';
 import {Modal, Button, Form, Row, Col,Container} from 'react-bootstrap';
 
 const ProblemCode = (props) =>{
-                                                                    
+    
     return(
         <div className="problemcode">
             <div className="codestyle">
               소스코드
-            <Button variant="secondary" size="sm" className="reset-button" onClick = {e => {props.setCode(props.inits);alert("초기화")}}>
-                초기화
-            </Button>
+              <Button variant="secondary" size="sm" className="reset-button" 
+                onClick = {e => {props.setCode(props.inits);alert("초기화")}}>
+                    초기화
+                </Button>
             </div>
             <CodeMirror
                 value={props.code}
@@ -33,7 +34,8 @@ const ProblemCode = (props) =>{
                 mode: 'python',
                 keyMap: 'sublime',                
             }}
-            />
+            >
+            </CodeMirror>
         </div>
     )
 }

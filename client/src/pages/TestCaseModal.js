@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from 'react';
 import {Modal, Button, Form, Row, Col,Container} from 'react-bootstrap';
-
+import Table from 'react-bootstrap/Table'
+import '../assets/testcasemodal.css'
 function TestCaseModal(props) {
     const [inputList, setInputList] = useState([{ input: "", output:""}]);
 
@@ -35,13 +36,33 @@ function TestCaseModal(props) {
                         테스트 케이스 추가
                     </Modal.Title>
                 </Modal.Header>
-            <Modal.Body className="show-grid">
+            <Modal.Body className="show-grid">                  
+                <Table striped bordered hover size="sm">
+                <thead>
+                    <tr>
+                    <th>{props.sample.schema}</th>
+                    <th>output</th>
+                    </tr>
+                </thead>
+                {props.sample.testcase.map((testcase, index)=>{
+              return(
+                <tbody>
+                    <tr>
+                    <td>{testcase.input}</td>
+                    <td>{testcase.output}</td>
+                    </tr>
+                </tbody>
+                )   
+                })}                
+                </Table>
+
             {inputList.map((x, i) => {
             return (
                 <div className="box">
                 <input
+                    className="testcase-box"
                     name="input"
-                    placeholder="Parameter(int a int b)"
+                    placeholder={props.sample.schema}
                     value={x.firstName}
                     onChange={e => handleInputChange(e, i)}
                 />
@@ -64,7 +85,6 @@ function TestCaseModal(props) {
             })}
       </Modal.Body>
       <Modal.Footer>
-        {/* <Button variant="primary" onClick={e => handleAddClick(e)}>Add</Button> */}
         <Button variant="secondary" onClick={()=>props.handleClose(false)} >Close</Button>
       </Modal.Footer>
       </Modal>

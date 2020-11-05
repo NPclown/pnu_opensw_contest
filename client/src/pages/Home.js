@@ -32,7 +32,7 @@ function Home(props) {
   useEffect(() => {
       const getData = async() => {
           try{
-              var result = await Axios.get(`/api/workbooks/1`);
+              var result = await Axios.get(`/api/workbooks/${id}`);
               setState({data : result.data.data.items, isLoading:false})
               setCode(result.data.data.items.inits[language.name])
           } catch(error) {
@@ -41,8 +41,7 @@ function Home(props) {
           }
       }
       getData();
-  },[])
-
+  },[id,language])
 
   const toBackEnd = async(e,id,language,code,testcase) => {
     e.preventDefault()
@@ -94,7 +93,9 @@ function Home(props) {
             <Problem cont={state.data.cont}></Problem>
           </div>
         <SplitPane  split="horizontal" defaultSize={350} minSize={350} >
-        <ProblemCode inits={state.data.inits[language.name]} setGo={setGo} go={go} code={code} setCode={(value)=>setCode(value)}></ProblemCode>          
+
+        <ProblemCode inits={state.data.inits[language.name]} language={language}
+        setGo={setGo} go={go} code={code} setCode={(value)=>setCode(value)}></ProblemCode>          
         <div className="codestyle problem-scroll2">
               소스결과
               {result.isLoading?(""):(<ProblemResult result={result}></ProblemResult>)}
@@ -116,7 +117,7 @@ function Home(props) {
         채점 및 제출        
       </Button>
       </div>
-      <TestCaseModal show={show} handleClose={handleClose} handleShow={handleShow} setTestCase={setTestCase}>
+      <TestCaseModal sample={state.data.sample} show={show} handleClose={handleClose} handleShow={handleShow} setTestCase={setTestCase}>
       </TestCaseModal>
       </div>
     </div>
