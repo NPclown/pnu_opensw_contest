@@ -1,7 +1,6 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState} from 'react';
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
-import { Link } from 'react-router-dom';
 import '../assets/ProblemLanguage.css'
 const ProblemLanguage = (props) =>{
     const [radioValue, setRadioValue] = useState('1');

@@ -16,7 +16,7 @@
     padding-left: 20px;
     padding-top: 3px;
     max-width: 1200px;
-    min-width: 1200px;
+    min-width: 1190px;
 }
 .problem-number{
   position: absolute;
@@ -69,7 +69,7 @@
 }
 .footer {
   max-width: 1200px;
-  min-width: 1200px;
+  min-width: 1190px;
     height: 50px;
     /* border: 5pt groove #3f51b5; */
     position: relative;

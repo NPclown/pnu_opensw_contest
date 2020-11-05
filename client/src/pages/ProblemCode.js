@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React from 'react';
 import '../assets/problemcode.css'
 import 'codemirror/keymap/sublime';
 import 'codemirror/theme/lucario.css';

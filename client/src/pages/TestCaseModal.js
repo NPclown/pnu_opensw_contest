@@ -1,5 +1,5 @@
-import React, {useState,useEffect} from 'react';
-import {Modal, Button, Form, Row, Col,Container} from 'react-bootstrap';
+import React, {useState} from 'react';
+import {Modal, Button} from 'react-bootstrap';
 import Table from 'react-bootstrap/Table'
 import '../assets/testcasemodal.css'
 function TestCaseModal(props) {
@@ -93,3 +93,4 @@ function TestCaseModal(props) {
     )
 }
 export default TestCaseModal;
+

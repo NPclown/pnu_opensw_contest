@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from 'react';
 import Axios from 'axios'
 import '../assets/problemList.css'
-import { Link , Redirect} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 function ProblemList(props) {

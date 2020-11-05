@@ -7,7 +7,9 @@
     height: 450px;
 }
 .reset-button{
-position: relative;
+    position: relative;
+    margin-left:10px;
+    margin-bottom:2px;
 }
 .codestyle{
     color:#494c52;
