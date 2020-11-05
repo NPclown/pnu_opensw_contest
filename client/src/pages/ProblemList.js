@@ -2,6 +2,7 @@ import React, {useState,useEffect} from 'react';
 import Axios from 'axios'
 import '../assets/problemList.css'
 import { Link , Redirect} from 'react-router-dom';
+import Table from 'react-bootstrap/Table'
 
 function ProblemList(props) {
 
@@ -30,16 +31,27 @@ function ProblemList(props) {
             <div className="header">
                 문제 목록
             </div>  
-            {state.data.map((list, index)=>{
+            
+            <Table striped bordered hover size="sm">
+                <thead>
+                    <tr>
+                    <th>문제 번호</th>
+                    <th>문제 이름</th>
+                    </tr>
+                </thead>
+                {state.data.map((list, index)=>{
                 return(
-                    <div className="problem-list">
-                        <Link to = {`/${list.id}`} key={index}>
-                            {list.id} .             
-                            {list.name}
-                        </Link>
-                    </div>
-            )
-            })}
+                <tbody>
+                    <tr>
+                    <td>{list.id}</td>
+                    <Link to = {`/${list.id}`} key={index}>
+                    <td>{list.name}</td>
+                    </Link>
+                    </tr>
+                </tbody>
+                )   
+                })}                
+            </Table>
         </div>
   );
 }

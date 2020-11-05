@@ -1,8 +1,8 @@
 import React, {useState,useEffect} from 'react';
 import '../assets/main.css';
-import SplitPane, { Pane } from 'react-split-pane';
+import SplitPane from 'react-split-pane';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Modal, Button, Form, Row, Col,Container} from 'react-bootstrap';
+import { Button} from 'react-bootstrap';
 import TestCaseModal from './TestCaseModal';
 import ProblemCode from './ProblemCode';
 import TestcaseResult from './TestcaseResult';
@@ -91,7 +91,7 @@ function Home(props) {
             <ProblemTitle main={"문제 설명"}></ProblemTitle>
             <Problem cont={state.data.cont}></Problem>
           </div>
-        <SplitPane  split="horizontal" defaultSize={350} minSize={350} >
+        <SplitPane  split="horizontal" defaultSize={240} minSize={240} >
 
         <ProblemCode inits={state.data.inits[language.name]} language={language}
         setGo={setGo} go={go} code={code} setCode={(value)=>setCode(value)}></ProblemCode>          

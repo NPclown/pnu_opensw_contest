@@ -21,8 +21,8 @@ const ProblemLanguage = (props) =>{
               type="radio"
               variant="secondary"
               name="radio"
-              value={radio.value}
-              checked={radioValue === radio.value}
+              value={String(radio.value)}
+              checked={radioValue ===String(radio.value)}
               onChange={(e) => setRadioValue(e.currentTarget.value)
             }
             onClick={()=>props.setLanguage({name:radios[idx].name, value:radios[idx].value})}
