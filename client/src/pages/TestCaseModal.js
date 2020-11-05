@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react';
 import {Modal, Button, Form, Row, Col,Container} from 'react-bootstrap';
 
 function TestCaseModal(props) {
-    const [inputList, setInputList] = useState([{ firstName: "", lastName: "", returnName:""}]);
+    const [inputList, setInputList] = useState([{ input: "", output:""}]);
 
     // handle input change
     const handleInputChange = (e, index) => {
@@ -24,12 +24,9 @@ function TestCaseModal(props) {
     
     // handle click event of the Add button
     const handleAddClick = () => {
-      setInputList([...inputList, { firstName: "", lastName: "" ,returnName:""}]);
+      setInputList([...inputList, { input: "",output:""}]);
     };
   
-    //
-
-
     return(
         <div className="TestCaseModal">
             <Modal show={props.show} onHide={props.handleClose}>
@@ -43,21 +40,14 @@ function TestCaseModal(props) {
             return (
                 <div className="box">
                 <input
-                    name="firstName"
-                    placeholder="Parameter(int a)"
+                    name="input"
+                    placeholder="Parameter(int a int b)"
                     value={x.firstName}
                     onChange={e => handleInputChange(e, i)}
                 />
                 <input
                     className="ml10"
-                    name="lastName"
-                    placeholder="Parameter(int b)"
-                    value={x.lastName}
-                    onChange={e => handleInputChange(e, i)}
-                />
-                <input
-                    className="ml10"
-                    name="returnName"
+                    name="output"
                     placeholder="Output"
                     value={x.returnName}
                     onChange={e => handleInputChange(e, i)}

@@ -136,11 +136,6 @@
     max-width: 750px !important;
 }
 
-
-.problem-language{
-  float: right;
-  padding-right:36px;
-}
 .SplitPane{
   position: relative !important;
 }
@@ -150,17 +145,13 @@
   margin-top: -54px;
 }
 
-.codestyle{
-  color:#494c52;
-  padding-left:10px;
-  font-weight: 700;
-  /* font-size: 20px; */
-}
-
-
 .addtestcase{
   position: relative;
   margin-left:30px;
   bottom: -3px;
 
+}
+.problem-scroll2{
+  overflow-y: scroll;
+  height: 130px;
 }

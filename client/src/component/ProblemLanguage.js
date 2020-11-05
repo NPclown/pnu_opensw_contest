@@ -1,14 +1,9 @@
-
 import React, {useState,useEffect} from 'react';
-import Dropdown from 'react-bootstrap/Dropdown'
-import Collapse from 'react-bootstrap/Collapse'
-import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import { Link } from 'react-router-dom';
-
+import '../assets/ProblemLanguage.css'
 const ProblemLanguage = (props) =>{
-    const [checked, setChecked] = useState(false);
     const [radioValue, setRadioValue] = useState('1');
     const radios = [
         { name: 'c', value: 1 },
@@ -17,6 +12,7 @@ const ProblemLanguage = (props) =>{
         { name: 'python3', value: 4 },
       ];
     return(
+      <div className="problem-language">
        <>
         <ButtonGroup toggle>
           {radios.map((radio, idx) => (
@@ -29,14 +25,14 @@ const ProblemLanguage = (props) =>{
               checked={radioValue === radio.value}
               onChange={(e) => setRadioValue(e.currentTarget.value)
             }
-            onClick={()=>props.setLanguage(radios[idx].name)}
+            onClick={()=>props.setLanguage({name:radios[idx].name, value:radios[idx].value})}
             >
               {radio.name}
             </ToggleButton>
           ))}
         </ButtonGroup>
       </>
-    
+      </div>
     )
     
 }
