@@ -26,6 +26,12 @@
         "testcase" : [{
           "input" : "3 4",
           "output" : "7"
+        },{
+          "input" : "4 5",
+          "output" : "9"
+        },{
+          "input" : "4 6",
+          "output" : "15"
         }],
         "schema" : "a(int) b(int)"
       },
@@ -70,6 +76,12 @@
         "testcase" : [{
           "input" : "3 4",
           "output" : "3.5"
+        },{
+          "input" : "9 8",
+          "output" : "8.5"
+        },{
+          "input" : "1 2 3 4 5 6 7 8 9",
+          "output" : "5"
         }],
         "schema" : "arr(int [])"
       },

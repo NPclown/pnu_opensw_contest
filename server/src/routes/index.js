@@ -44,7 +44,8 @@ router.get('/workbooks/:workbook_id',async(req,res) => {
                 id : workbook.id,
                 name : workbook.name,
                 cont : workbook.cont,
-                inits : workbook.inits
+                inits : workbook.inits,
+                sample : workbook.sample
             }
             res.json({code: 0, data : {msg : "Success", items : result}});
         }

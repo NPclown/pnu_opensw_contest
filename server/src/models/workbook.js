@@ -22,6 +22,13 @@ const workbookSchema = mongoose.Schema({
         cpp : String
       }
   },
+  sample : {
+    testcase : [{
+      input : String,
+      output : String
+    }],
+    schema : String
+  },
   score: [
       {
           input : String,
@@ -29,6 +36,7 @@ const workbookSchema = mongoose.Schema({
       }
   ]
 })
+
 
 const Workbook = mongoose.model('Workbook', workbookSchema)
 

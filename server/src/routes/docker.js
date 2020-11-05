@@ -50,14 +50,14 @@ const languageSelect = (language) => {
             case 1:   //c
                 langaugeOptions = {
                     dockerImage : 'npclown/gcc:3.0',
-                    compile : 'cd tmp; gcc -o main.out *.c',
+                    compile : 'cd tmp; gcc -o main.out *.c -O2 -Wall -lm --static -std=gnu99 -DONLINE_JUDGE',
                     run : `cd tmp; ./main.out`
                 }
                 break;
             case 2:   //cpp
                 langaugeOptions = {
                     dockerImage : 'npclown/gcc:3.0',
-                    compile : 'cd tmp; g++ -o main.out *.cpp',
+                    compile : 'cd tmp; g++ -o main.out *.cpp -O2 -Wall -lm --static -DONLINE_JUDGE',
                     run : `cd tmp; ./main.out`
                 }
                 break;
@@ -189,6 +189,7 @@ const dockerScore = (tmp_dir, options, index) => {
 
 router.post('/execution', postValidator, async(req, res, next) =>{
     try{
+        console.log("executions");
         const errors = validationResult(req).array();
 
         if (errors.length > 0) {
@@ -283,7 +284,7 @@ router.post('/execution', postValidator, async(req, res, next) =>{
                     var execute = await dockerCreate(tmp_dir, options, index);
 
                     if(execute.state > 0){
-                        rimraf.sync(tmp_dir);
+                        // rimraf.sync(tmp_dir);
                         res.json({code : 21,
                             data : {
                                 msg : "Compile Error",
@@ -298,7 +299,7 @@ router.post('/execution', postValidator, async(req, res, next) =>{
 
                     execute_result.push(execute)
                 }
-                rimraf.sync(tmp_dir);
+                // rimraf.sync(tmp_dir);
                 res.json({code : 0,
                     data : {
                         msg : "Success",
@@ -320,6 +321,7 @@ router.post('/execution', postValidator, async(req, res, next) =>{
 
 router.post('/score', async(req, res, next) =>{
     try{
+        console.log("score");
         const errors = validationResult(req).array();
 
         if (errors.length > 0) {
