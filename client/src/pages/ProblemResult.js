@@ -8,15 +8,15 @@ function ProblemResult(props) {
     return(
         <div className="problemresult ">
           <div>
-          {props.result.data.score}
+           점수: {props.result.data.score}
           {props.result.data.result.map((problemresult, index)=>{
               return(
                 <div>
-                  <div>                
-                  {problemresult.success?("성공"):("실패")}
+                  <div className="top-line">                
+                  결과: {problemresult.success?("성공"):("실패")}
                   </div>
                   <div>                
-                  {problemresult.time}
+                  런타임: {problemresult.time}
                   </div>
                 </div>
 

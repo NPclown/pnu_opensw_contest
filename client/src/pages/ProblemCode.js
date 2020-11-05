@@ -14,7 +14,6 @@ import {Button} from 'react-bootstrap';
 const ProblemCode = (props) =>{
     
     const type ={'c': "text/x-csrc", 'cpp': "text/x-c++src", 'python': "python", 'python3': "python"}
-    
 
     return(
         <div className="problemcode">

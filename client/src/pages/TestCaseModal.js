@@ -73,7 +73,6 @@ function TestCaseModal(props) {
                     value={x.returnName}
                     onChange={e => handleInputChange(e, i)}
                 />
-
                     {inputList.length !== 1 && <Button
                     className="mr10"
                     variant="outline-danger"

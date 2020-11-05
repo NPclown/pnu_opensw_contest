@@ -2,3 +2,6 @@
     height: 10%;
     overflow-y: scroll;
 } */
+.top-line{
+    border-top: solid 2px;    
+}

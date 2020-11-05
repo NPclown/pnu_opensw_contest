@@ -75,13 +75,6 @@ function Home(props) {
       <div className="App">
       <div className="header">
         {state.data.name}
-        <span className = "problem-number">
-        <ButtonToolbar aria-label="Toolbar with button groups">
-          <ButtonGroup className="mr-2" aria-label="First group">
-            <Button variant="outline-dark" onClick={()=>setId(1)}>1</Button> <Button variant="outline-dark" onClick={()=>setId(2)}>2</Button>
-          </ButtonGroup>
-        </ButtonToolbar>
-        </span>
         <ProblemLanguage language={language} setLanguage={setLanguage}></ProblemLanguage>
       </div>
 
@@ -97,8 +90,10 @@ function Home(props) {
         setGo={setGo} go={go} code={code} setCode={(value)=>setCode(value)}></ProblemCode>          
         <div className="codestyle problem-scroll2">
               소스결과
+              <div className="problem-result">
               {result.isLoading?(""):(<ProblemResult result={result}></ProblemResult>)}
               {resultT.isLoading?(""):(<TestcaseResult result={resultT}></TestcaseResult>)}
+              </div>
         </div>
         </SplitPane>
         </SplitPane>

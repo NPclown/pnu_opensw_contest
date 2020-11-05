@@ -11,17 +11,17 @@ function TestcaseResult(props) {
           {props.result.data.result.map((problemresult, index)=>{
               return(
                 <div>
-                  <div>                
-                  {problemresult.success?("성공"):("실패")}
+                  <div className="top-line">                
+                  결과: {problemresult.success?("성공"):("실패")}
                   </div>
                   <div>                
-                  {problemresult.input}
+                  입력값: {problemresult.input}
                   </div>
                   <div>                
-                  {problemresult.output}
+                  기댓값: {problemresult.output}
                   </div>
                   <div>                
-                  {problemresult.result}
+                  실행 결과: {problemresult.result}
                   </div>
                   <div>                
                   {problemresult.prints}
