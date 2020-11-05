@@ -25,10 +25,11 @@ const ProblemCode = (props) =>{
                 </Button>
             </div>
             <CodeMirror
-                value={props.inits}
+                value={props.code}
                 onChange={(editor,data,value)=>{
                     props.setCode(value.replace(/\n/ig, '\n'))
                 }}
+                autoCursor={false}
                 options={{
                 theme: 'lucario',
                 tabSize: 2,
