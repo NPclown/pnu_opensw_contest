@@ -1,0 +1,10 @@
+.problem-list{
+    padding-top:10px;
+    padding-left: 20px;
+    font-size: 20px;
+}
+.add-button{
+    float: right;
+    margin-right: 55px;
+    margin-top: 4px;
+}
