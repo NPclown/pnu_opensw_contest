@@ -198,9 +198,9 @@ router.post('/execution', postValidator, async(req, res, next) =>{
             const id = req.body.id;
             const code = req.body.code;
             const language = req.body.language;
-            const testcase = req.body.testcase;
-            const langaugeOptions  = await languageSelect(language);
             const workbook = await Workbook.findOne({id:id})
+            const testcase = workbook.sample.testcase.concat(req.body.testcase);
+            const langaugeOptions  = await languageSelect(language);
 
             //임시 폴더 생성
             const tmp_dir = __dirname+"/../tmp/"+cryptoRandomString({length:16});
