@@ -24,7 +24,6 @@ function Home(props) {
     const [language,setLanguage] = useState({name:"c",value:1})
     const [result,setResult] = useState({data:{}, isLoading:true})
     const [resultT,setResultT] = useState({data:{}, isLoading:true})
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [state,setState]=useState({data:{}, isLoading:true})
@@ -32,7 +31,7 @@ function Home(props) {
   useEffect(() => {
       const getData = async() => {
           try{
-              var result = await Axios.get(`/api/workbooks/${id}`);
+              var result = await Axios.get(`/api/workbooks/${props.match.params.id}`);
               setState({data : result.data.data.items, isLoading:false})
               setCode(result.data.data.items.inits[language.name])
           } catch(error) {

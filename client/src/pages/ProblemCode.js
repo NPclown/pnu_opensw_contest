@@ -10,9 +10,13 @@ import 'codemirror/keymap/sublime'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/xml/xml';
 import {Modal, Button, Form, Row, Col,Container} from 'react-bootstrap';
+import ProblemLanguage from '../component/ProblemLanguage';
 
 const ProblemCode = (props) =>{
     
+    const type ={'c': "text/x-csrc", 'cpp': "text/x-c++src", 'python': "python", 'python3': "python"}
+      
+
     return(
         <div className="problemcode">
             <div className="codestyle">
@@ -31,11 +35,12 @@ const ProblemCode = (props) =>{
                 theme: 'lucario',
                 tabSize: 2,
                 lineNumbers:true,
-                mode: 'python',
+                mode: type[props.language.name],
                 keyMap: 'sublime',                
             }}
             >
             </CodeMirror>
+            {console.log(type[props.language.name])}
         </div>
     )
 }
