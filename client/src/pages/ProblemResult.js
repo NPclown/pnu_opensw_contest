@@ -1,7 +1,6 @@
 import '../assets/main.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Axios from 'axios';
-import React, {useState,useEffect} from 'react';
+import React from 'react';
 import '../assets/problemresult.css'
 function ProblemResult(props) {
 

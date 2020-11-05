@@ -14,6 +14,7 @@ function TestCaseModal(props) {
       setInputList(list);
       props.setTestCase(inputList)
     };
+
     
     // handle click event of the Remove button
     const handleRemoveClick = index => {
@@ -52,10 +53,9 @@ function TestCaseModal(props) {
                     <td>{testcase.output}</td>
                     </tr>
                 </tbody>
-                )   
+                )
                 }
-                )} 
-                               
+                )}  
                 </Table>
 
             {inputList.map((x, i) => {
@@ -93,4 +93,3 @@ function TestCaseModal(props) {
     )
 }
 export default TestCaseModal;
-
