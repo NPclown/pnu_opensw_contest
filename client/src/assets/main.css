@@ -1,0 +1,163 @@
+.App {
+    margin : auto;
+    background-color: #d9e7ff;
+    border: groove 5px #d9e7ff;
+    max-width: 1200px;
+    min-width: 1200px;
+}
+
+.header {
+    height: 60px;
+    border: solid #b8b6b6;
+    border-radius: 3em ;
+    font-size: 30px;
+    color: #494c52;
+    font-weight: 700;
+    padding-left: 20px;
+    padding-top: 3px;
+    max-width: 1200px;
+    min-width: 1190px;
+}
+.problem-number{
+  position: absolute;
+  padding-left: 20px;
+  padding-top: 3px;
+}
+.main-section{
+    height: 500px;
+    width: 100%;
+    padding-top: 5px;
+}
+.problem {
+    word-wrap: break-all;
+    height: 100%;
+    width: 100%;
+    /* border: solid 2px red; */
+}
+.problem-code {
+    flex: 1 1 auto;
+    /* resizable */
+    width: 100%;
+    min-height: 200px;
+    min-width: 200px;
+    background: #eee;
+}
+
+.col-scroll{
+    flex: 0 0 auto;
+    width: 18px;  
+    width:5px;
+    min-height: 200px;
+    cursor: col-resize;  
+    background: yellow;
+}
+.row-scroll{
+    flex: 0 0 auto;
+    height: 5px;
+    background: black;
+    cursor: row-resize;
+}
+.run-section{
+    width: 100%;
+}
+.problem-result{
+    flex: 1 1 auto;
+    /* resizable */
+    min-height: 200px;
+    background: #eee;
+    text-align:justify;
+}
+.footer {
+  max-width: 1200px;
+  min-width: 1190px;
+    height: 50px;
+    /* border: 5pt groove #3f51b5; */
+    position: relative;
+    border: solid #b8b6b6;
+    border-radius: 3em ;
+}
+.Resizer {
+  background: #000;
+  opacity: 0.2;
+  z-index: 1;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  background-clip: padding-box;
+}
+ 
+.Resizer:hover {
+  -webkit-transition: all 2s ease;
+  transition: all 2s ease;
+}
+ 
+.Resizer.horizontal {
+  height: 11px;
+  margin: -5px 0;
+  border-top: 5px solid rgba(255, 255, 255, 0);
+  border-bottom: 5px solid rgba(255, 255, 255, 0);
+  cursor: row-resize;
+  width: 100%;
+  
+}
+ 
+.Resizer.horizontal:hover {
+  border-top: 5px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 5px solid rgba(0, 0, 0, 0.5);
+}
+ 
+.Resizer.vertical {
+  width: 11px;
+  margin: 0 -5px;
+  border-left: 5px solid rgba(255, 255, 255, 0);
+  border-right: 5px solid rgba(255, 255, 255, 0);
+  cursor: col-resize;
+}
+ 
+.Resizer.vertical:hover {
+  border-left: 5px solid rgba(0, 0, 0, 0.5);
+  border-right: 5px solid rgba(0, 0, 0, 0.5);
+}
+.Resizer.disabled {
+  cursor: not-allowed;
+}
+.Resizer.disabled:hover {
+  border-color: transparent;
+}
+
+.modal-contents{
+    display: flex;
+}
+
+.modal-retrun{
+    display: flex;
+}
+.modal-dialog {
+    max-width: 750px !important;
+}
+
+.SplitPane{
+  position: relative !important;
+}
+
+.send{
+  position: relative;
+  left: 600px;
+}
+
+.addtestcase{
+  position: relative;
+  margin-left:30px;
+  bottom: -3px;
+}
+
+.problem-scroll2{
+  overflow-y: scroll;
+  height: 250px;
+}
+.problem-result{
+  background-color: #d9e7ff;
+  font-size: 17px!important;
+}

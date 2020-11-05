@@ -1,0 +1,22 @@
+.problemcode{
+    width:98%;
+    position: absolute;
+}
+.problem-scroll{
+    overflow-y: scroll;
+    height: 450px;
+}
+.reset-button{
+    position: relative;
+    margin-left:10px;
+    margin-bottom:2px;
+}
+.codestyle{
+    color:#494c52;
+    padding-left:10px;
+    font-weight: 700;
+    font-size: 20px;
+  }
+.CodeMirror{
+    height:200px !important;
+}
