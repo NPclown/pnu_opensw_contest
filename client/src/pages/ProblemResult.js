@@ -21,9 +21,7 @@ function ProblemResult(props) {
 
             )
           })}
-
           </div>            
-            
         </div>
 
       
