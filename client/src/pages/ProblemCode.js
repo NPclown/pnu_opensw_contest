@@ -20,7 +20,8 @@ const ProblemCode = (props) =>{
             <div className="codestyle">
               소스코드
               <Button variant="secondary" size="sm" className="reset-button" 
-                onClick = {e => {props.setCode(props.inits);alert("초기화")}}>
+                onClick = {e => {props.setCode(props.inits);alert("초기화"); props.setResult({data: {},isLoading:true})
+                ;props.setResultT({data: {},isLoading:true})}}>
                     초기화
                 </Button>
             </div>

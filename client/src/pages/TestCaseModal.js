@@ -22,6 +22,7 @@ function TestCaseModal(props) {
       list.splice(index, 1);
       setInputList(list);
       props.setTestCase(list)
+      console.log(list)
     };
     
     // handle click event of the Add button

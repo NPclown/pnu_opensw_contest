@@ -43,11 +43,13 @@ function Home(props) {
   const toBackEnd = async(e,id,language,code,testcase) => {
     e.preventDefault()
     var result3;
+
         try{
             result3 = await Axios.post(`/run/execution`,{id : id, 
                 language:language.value, code:code, testcase:testcase});
+                
             setResultT({data: result3.data.data.items, isLoading:false})
-            setResult({data: {},isLoading:true})
+            
 
         } catch(error) {
             alert(error)
@@ -62,7 +64,7 @@ function Home(props) {
                 result2 = await Axios.post(`/run/score`,{id : id, 
                     language:language.value, code:code});
                 setResult({data: result2.data.data.items,isLoading:false})
-                setResultT({data: {},isLoading:true})
+                
 
             } catch(error) {
                 alert(error)
@@ -90,7 +92,8 @@ function Home(props) {
         <SplitPane  split="horizontal" defaultSize={240} minSize={240} >
 
         <ProblemCode inits={state.data.inits[language.name]} language={language}
-        setGo={setGo} go={go} code={code} setCode={(value)=>setCode(value)}></ProblemCode>          
+        setGo={setGo} go={go} code={code} setCode={(value)=>setCode(value)}
+        setResult={setResult} setResultT={setResultT}></ProblemCode>          
         <div className="codestyle problem-scroll2">
               소스결과
               <div className="problem-result">
@@ -107,10 +110,12 @@ function Home(props) {
       <Button variant="secondary" onClick={()=>handleShow(true)}>
         테스트 케이스 추가하기
       </Button>
-      <Button variant="secondary" onClick={e => {toBackEnd(e,id,language,code,testcase); alert("테스트케이스")}}>
+      <Button variant="secondary" onClick={e => {setResult({data: {},isLoading:true});toBackEnd(e,id,language,code,testcase); 
+      setResultT({data: {},isLoading:true});alert("테스트케이스");}}>
         테스트케이스 실행
       </Button>
-      <Button className="send" variant="secondary" onClick={e => {toBackEnd2(e,id,language,code); alert("제출완료")}}>
+      <Button className="send" variant="secondary" onClick={e => {setResultT({data: {},isLoading:true});toBackEnd2(e,id,language,code); 
+      setResult({data: {},isLoading:true});alert("제출완료");}}>
         채점 및 제출        
       </Button>
       </div>
