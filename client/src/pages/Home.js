@@ -18,7 +18,7 @@ function Home(props) {
     const [go,setGo] = useState(true)
     const [id,setId] = useState("1")
     const [code,setCode] = useState("")
-    const [testcase,setTestCase] = useState([])
+    const [testcase,setTestCase] = useState()
     const [language,setLanguage] = useState({name:"c",value:1})
     const [result,setResult] = useState({data:{}, isLoading:true})
     const [resultT,setResultT] = useState({data:{}, isLoading:true})
@@ -47,14 +47,11 @@ function Home(props) {
         try{
             result3 = await Axios.post(`/run/execution`,{id : id, 
                 language:language.value, code:code, testcase:testcase});
-                
             setResultT({data: result3.data.data.items, isLoading:false})
-            
 
         } catch(error) {
             alert(error)
         }
-        console.log(resultT)
     }
 
     const toBackEnd2 = async(e,id,language,code) => {
@@ -64,8 +61,6 @@ function Home(props) {
                 result2 = await Axios.post(`/run/score`,{id : id, 
                     language:language.value, code:code});
                 setResult({data: result2.data.data.items,isLoading:false})
-                
-
             } catch(error) {
                 alert(error)
             }

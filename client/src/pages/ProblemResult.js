@@ -18,7 +18,6 @@ function ProblemResult(props) {
                   런타임: {problemresult.time}
                   </div>
                 </div>
-
             )
           })}
           </div>            
