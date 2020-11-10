@@ -12,9 +12,9 @@ import Axios from 'axios';
     const [id,setId] = useState("1")
     const [show, setShow] = useState(false);
     const [go,setGo] = useState(true)
-    const [testcase,setTestCase] = useState()
-    const [result,setResult] = useState({data:[], isLoading:true})
-    const [resultT,setResultT] = useState({data:[], isLoading:true})
+    const [testcase,setTestCase] = useState([])
+    const [result,setResult] = useState({data:{}, isLoading:true})
+    const [resultT,setResultT] = useState({data:{}, isLoading:true})
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [state,setState]=useState({data:{}, isLoading:true})
@@ -57,7 +57,6 @@ const toBackEnd = async(e,id,language,code,testcase) => {
               alert(error)
           }
       }
-      console.log(state.data.cont)
   return state.isLoading ? (
     <div className="d-flex h-100 align-items-center justify-content-center">
     <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" />
@@ -75,13 +74,23 @@ const toBackEnd = async(e,id,language,code,testcase) => {
           <Problem cont={state.data.cont} />
         </div>
         <Workspace
+          handleClose={handleClose} 
+          handleShow={handleShow}
+          testcase={testcase}
+          setTestCase={setTestCase}
+          show={show}
+          setShow={setShow}
+          sample={state.data.sample}
+          id={id}
+          toBackEnd={toBackEnd}
+          toBackEnd2={toBackEnd2}
           result={result}
           resultT={resultT}
           language={language} setLanguage={setLanguage}
           inits={state.data.inits[language.name]}
           setGo={setGo} go={go} code={code} setCode={(value)=>setCode(value)}
           setResult={setResult} setResultT={setResultT}
-           />
+          />
       </Split>
     )
   }

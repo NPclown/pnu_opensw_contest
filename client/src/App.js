@@ -11,6 +11,8 @@ import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import WorkspacePage from './pages/WorkspacePage';
 import IndexPage from './pages/IndexPage';
 import './App.css';
+import AddProblem from './pages/AddProblem'
+import Spacer from './components/Spacer';
 
 function App(props) {
   const navbarHeight = "56px";
@@ -29,8 +31,16 @@ function App(props) {
             </NavbarBrand>
             <Nav navbar>
               <NavItem>
-                <NavLink tag={RRNavLink} to="/workspace">
+                <NavLink tag={RRNavLink} to="/">
                   by D-Hyun-A
+                </NavLink>
+              </NavItem>
+            </Nav>
+            <Spacer></Spacer>
+            <Nav navbar>
+              <NavItem>
+                <NavLink tag={RRNavLink} to="/add">
+                  문제 추가하기
                 </NavLink>
               </NavItem>
             </Nav>
@@ -40,6 +50,7 @@ function App(props) {
           >
             <Switch>
               <Route exact path="/" render={(props) => <IndexPage {...props} />} />
+              <Route exact path="/add" render={(props) => <AddProblem {...props} />} />
               <Route exact path="/workspace/:id" render={(props) => <WorkspacePage {...props} />} />
               <Redirect to="/" />
             </Switch>

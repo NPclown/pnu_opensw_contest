@@ -3,7 +3,7 @@ import '../assets/main.css';
 import SplitPane from 'react-split-pane';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button} from 'react-bootstrap';
-import TestCaseModal from './TestCaseModal';
+import TestCaseModal from '../components/TestCaseModal';
 import ProblemCode from './ProblemCode';
 import TestcaseResult from './TestcaseResult';
 import Problem from './Problem';
@@ -85,7 +85,6 @@ function Home(props) {
             <Problem cont={state.data.cont}></Problem>
           </div>
         <SplitPane  split="horizontal" defaultSize={240} minSize={240} >
-
         <ProblemCode inits={state.data.inits[language.name]} language={language}
         setGo={setGo} go={go} code={code} setCode={(value)=>setCode(value)}
         setResult={setResult} setResultT={setResultT}></ProblemCode>          

@@ -17,21 +17,30 @@ function Workspace(props) {
       keyboardHandler: ''
     }}
 
-  const [tabs,setTab] = useState(['Execution', 'Tests'])
-
     return (
        <AceContext.Provider value={state.aceProps}>
-        <Split direction="vertical" sizes={[70, 30]} minSize={[100, 0]} gutterSize={4}>
+        <Split direction="vertical" sizes={[50, 50]} minSize={[100, 0]} gutterSize={4}>
           <Editor
+            testcase={props.testcase}
+            setTestCase={props.setTestCase}
+            show={props.show}
+            handleClose={props.handleClose} 
+            handleShow={props.handleShow}
+            setShow={props.setShow}
+            sample={props.sample}
+            setLanguage={props.setLanguage}
+            id={props.id}
+            toBackEnd={props.toBackEnd}
+            toBackEnd2={props.toBackEnd2}
             inits={props.inits} language={props.language} 
             setGo={props.setGo} go={props.go} code={props.code} setCode={(value)=>props.setCode(value)}
             setResult={props.setResult} setResultT={props.setResultT}
           />
           <div className="results-view">
-            {props.result.isLoading?(
-                  <div>loading</div>
-                ):(<TabPane tabId={0}>
-
+            { Object.keys(props.result.data).length === 0?(
+                 ""
+                ):(<div>
+                  {console.log(props.result)}
                   점수: {props.result.data.score}
                   {props.result.data.result.map((problemresult, index)=>{
                   return(
@@ -44,10 +53,10 @@ function Workspace(props) {
                       </div>
                     </div>
                     )})}
-                </TabPane>)}
-                {props.resultT.isLoading?(
-                  <div>loading</div>
-                ):(<TabPane tabId={1}>
+                </div>)}
+                {Object.keys(props.resultT.data).length === 0?(
+                  ""
+                ):(<div>
                   <div className="p-2">
                     {props.resultT.data.result.map((problemresult, index)=>{
                         return(
@@ -72,7 +81,7 @@ function Workspace(props) {
                     })}
                   </div>
                 )
-              </TabPane>
+              </div>
               )}
           </div>
         </Split>

@@ -15,14 +15,12 @@ function TestCaseModal(props) {
       props.setTestCase(inputList)
     };
 
-    
     // handle click event of the Remove button
     const handleRemoveClick = index => {
       const list = [...inputList];
       list.splice(index, 1);
       setInputList(list);
       props.setTestCase(list)
-      console.log(list)
     };
     
     // handle click event of the Add button
@@ -54,9 +52,7 @@ function TestCaseModal(props) {
                     <td>{testcase.output}</td>
                     </tr>
                 </tbody>
-                )
-                }
-                )}  
+                )})}  
                 </Table>
 
             {inputList.map((x, i) => {
