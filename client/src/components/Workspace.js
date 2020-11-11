@@ -1,6 +1,5 @@
-import React ,{useEffect, useState} from 'react';
+import React ,{useState} from 'react';
 import Split from 'react-split';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Table, Button } from 'reactstrap';
 import Editor from './Editor';
 import './Workspace.css';
 import AceContext from '../context/AceContext';
@@ -9,19 +8,7 @@ function Workspace(props) {
   const [result,setResult] = useState({data:{}, isLoading:true})
   const [resultT,setResultT] = useState({data:{}, isLoading:true})
 
-  const state = {
-    input: '',
-    result: null,
-    testResults: null,
-    working: false,
-    tab: 0,
-    aceProps: {
-      theme: 'dawn',
-      keyboardHandler: ''
-  }}
-
   return (
-      <AceContext.Provider value={state.aceProps}>
       <Split direction="vertical" sizes={[50, 50]} minSize={[100, 0]} gutterSize={4}>
         <Editor
           {...props}
@@ -30,7 +17,11 @@ function Workspace(props) {
         <div className="results-view">
           { Object.keys(result.data).length === 0?(
                 ""
-              ):(<div>
+              ):(
+                result.data.state===1 ? (
+                  result.data.result.err
+                ) : (
+                <div>
                 {console.log(result)}
                 점수: {result.data.score}
                 {result.data.result.map((problemresult, index)=>{
@@ -44,10 +35,13 @@ function Workspace(props) {
                     </div>
                   </div>
                   )})}
-              </div>)}
+              </div>))}
               {Object.keys(resultT.data).length === 0?(
                 ""
-              ):(<div>
+              ):(resultT.data.state===1 ? (
+                resultT.data.result.err
+              ) : (
+                <div>
                 <div className="p-2">
                   {resultT.data.result.map((problemresult, index)=>{
                       return(
@@ -72,10 +66,9 @@ function Workspace(props) {
                   })}
                 </div>
             </div>
-            )}
+            ))}
         </div>
       </Split>
-      </AceContext.Provider>
   );
 }
 

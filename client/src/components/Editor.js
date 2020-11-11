@@ -1,11 +1,10 @@
 import React ,{useState, useEffect} from 'react';
 import Axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUpload, faShareAlt, faDownload, faTools, faPlay, faCheck, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faUpload, faTools, faPlay, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, Form, FormGroup, Label, Input } from 'reactstrap';
 import Spacer from './Spacer';
 import '../assets/problemcode.css'
-import AceContext from '../context/AceContext';
 import 'codemirror/keymap/sublime';
 import 'codemirror/theme/lucario.css';
 import {UnControlled as CodeMirror} from 'react-codemirror2'
@@ -73,7 +72,7 @@ function Editor (props){
         <TestCaseModal {...props} show={show} setShow={setShow} testcase={testcase} setTestCase={setTestCase}>
         </TestCaseModal>
       </div>
-
+      
       <CodeMirror
         value={code}
         onChange={(editor,data,value)=>{
@@ -96,30 +95,26 @@ function Editor (props){
             <FontAwesomeIcon  icon={faTools} /> Settings
           </DropdownToggle>
           <DropdownMenu className="p-4">
-            <AceContext.Consumer>
-              {aceProps =>
-                <Form style={{ width: 300 }}>
-                  <FormGroup className="form-row">
-                    <Label className="col-4 font-weight-bold" for="language-select">Language</Label>
-                    <Spacer width={6} />
-                    <Input
-                      className="col"
-                      bsSize="sm"
-                      type="select"
-                      id="language-select"
-                      onChange = {(e)=>{setLanguage({name:radios[e.target.value-1].name ,
-                          value:radios[e.target.value-1].value});setRadioValue(e.target.value)}}
-                      >
-                      {radios.map((item,value) =>(
-                        <option name={item.name} value={item.value} selected={radioValue == item.value}>
-                          {item.name}
-                          </option>
-                      ))}
-                    </Input>
-                  </FormGroup>
-                </Form>
-              }
-            </AceContext.Consumer>
+              <Form style={{ width: 300 }}>
+                <FormGroup className="form-row">
+                  <Label className="col-4 font-weight-bold" for="language-select">Language</Label>
+                  <Spacer width={6} />
+                  <Input
+                    className="col"
+                    bsSize="sm"
+                    type="select"
+                    id="language-select"
+                    onChange = {(e)=>{setLanguage({name:radios[e.target.value-1].name ,
+                        value:radios[e.target.value-1].value});setRadioValue(e.target.value)}}
+                    >
+                    {radios.map((item,value) =>(
+                      <option name={item.name} value={item.value} select={`"${radioValue === item.value}"`}>
+                        {item.name}
+                        </option>
+                    ))}
+                  </Input>
+                </FormGroup>
+              </Form>
           </DropdownMenu>
         </ButtonDropdown>
         <Spacer/>

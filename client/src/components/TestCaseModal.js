@@ -47,7 +47,7 @@ function TestCaseModal(props) {
                 </thead>
                 {props.data.sample.testcase.map((testcase, index)=>{
                 return(
-                    <tbody>
+                    <tbody key={index}>
                         <tr>
                         <td>{testcase.input}</td>
                     <td>{testcase.output}</td>
@@ -58,7 +58,7 @@ function TestCaseModal(props) {
 
             {inputList.map((x, i) => {
             return (
-                <div className="box">
+                <div className="box" key={i}>
                 <input
                     className="testcase-box"
                     name="input"
