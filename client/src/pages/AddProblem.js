@@ -8,7 +8,10 @@ import Box from '@material-ui/core/Box';
 import 'codemirror/lib/codemirror.css';
 import AddEditor from '../components/AddEditor'
 import Axios from 'axios';
-
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import AddSourceEd from '../components/AddSourceEd'
+import AddAll from '../components/AddAll'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -93,13 +96,18 @@ export default function AddProblem(props) {
         <Tab label="문제이름" {...a11yProps(0)} />
         <Tab label="문제내용" {...a11yProps(1)} />
         <Tab label="테스트케이스" {...a11yProps(2)} />
-        <Tab label="초깃값" {...a11yProps(3)} />
-        <Tab label="코드" {...a11yProps(4)} />
+        <Tab label="코드" {...a11yProps(3)} />
+        <Tab label="초깃값" {...a11yProps(4)} />
         <Tab label="점수" {...a11yProps(5)} />
         <Tab label="제출하기" onClick ={(e)=>{toBackendAdd(e);alert("제출완료")}}{...a11yProps(6)} />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <AddEditor value={value} setTitle={setTitle} title={title} placeholder= '문제제목을 작성해 주세요.'></AddEditor>
+      <form className={classes.root} noValidate autoComplete="off">
+        <TextField id="outlined-basic" label="문제제목입력" variant="outlined"  />
+      </form>
+      <Button onClick={()=>{setTitle("가운데 글자 가져오기");alert("등록완료")}} variant="contained" color="primary" disableElevation>
+        저장
+      </Button>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <AddEditor value={value} setCont={setCont} placeholder= '문제를 작성해 주세요.'></AddEditor>
@@ -108,10 +116,10 @@ export default function AddProblem(props) {
         <AddEditor value={value} setTestcase={setTestcase} placeholder= '테스트케이스를 작성해 주세요.'></AddEditor>
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <AddEditor value={value} setCode={setCode} placeholder= '채점코드를 작성해 주세요.'></AddEditor>
+        <AddSourceEd  setCode={setCode} ></AddSourceEd>
       </TabPanel>
       <TabPanel value={value} index={4}>
-        <AddEditor value={value} setInit={setInit} placeholder= '초기코드를 작성해 주세요.'></AddEditor>
+      <AddSourceEd  setInit={setInit} ></AddSourceEd>
       </TabPanel>
       <TabPanel value={value} index={5}>
         <AddEditor value={value} setScore={setScore} placeholder= '점수를 작성해 주세요.'></AddEditor>
