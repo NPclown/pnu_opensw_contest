@@ -18,10 +18,8 @@ import '../components/Editor.css'
 import TestCaseModal from './TestCaseModal'
 
 function AddSourceEd (props){
-  const [id,setId] = useState(props.id)
-  const [code,setCode] = useState("")
+  const [code,setCode] = useState({c : "", cpp : "", python : "", python3 : ""})
   const [language,setLanguage] = useState({name:"c",value:1})
-  const [testcase,setTestCase] = useState([])
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
   const radios = [
@@ -36,14 +34,11 @@ function AddSourceEd (props){
   return (
     <div className="editor-area">
       <div className="editor-menu">
-        <Button onClick = {e => {setCode(props.data.inits[language.name]);alert("초기화"); props.setResult({data: {},isLoading:true}); props.setResultT({data: {},isLoading:true})}}>
-          <FontAwesomeIcon icon={faUpload} /> reset
-        </Button>
         <Spacer></Spacer>
       </div>
       
       <CodeMirror
-        value={code}
+        value={code[language.name]}
         onChange={(editor,data,value)=>{
             setCode(value.replace(/\n/ig, '\n'))
         }}

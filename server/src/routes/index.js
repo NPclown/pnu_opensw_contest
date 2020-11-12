@@ -58,7 +58,7 @@ router.get('/workbooks/:workbook_id',async(req,res) => {
 router.post('/workbooks', postValidator, (req,res) => {
     try{
         const errors = validationResult(req).array();
-
+        console.log(req.body)
         if (errors.length > 0) {
             res.json({ code: 43, data: { msg: 'Validation errors', err: errors } });
         } else {

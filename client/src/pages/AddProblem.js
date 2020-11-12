@@ -13,50 +13,62 @@ import Button from '@material-ui/core/Button';
 import AddSourceEd from '../components/AddSourceEd'
 import AddAll from '../components/AddAll'
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+// function TabPanel(props) {
+//   const { children, value, index, boxClass, typoClass, ...other } = props;
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
+//   return (
+//     <div
+//       role="tabpanel"
+//       hidden={value !== index}
+//       id={`vertical-tabpanel-${index}`}
+//       aria-labelledby={`vertical-tab-${index}`}
+//       {...other}
+//     >
+//       {value === index && (
+//         <Box className={boxClass} p={3}>
+//           <Typography className={typoClass}>{children}</Typography>
+//         </Box>
+//       )}
+//     </div>
+//   );
+// }
 
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
+// TabPanel.propTypes = {
+//   children: PropTypes.node,
+//   index: PropTypes.any.isRequired,
+//   value: PropTypes.any.isRequired,
+// };
 
-function a11yProps(index) {
-  return {
-    id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
-  };
-}
+// function a11yProps(index) {
+//   return {
+//     id: `vertical-tab-${index}`,
+//     'aria-controls': `vertical-tabpanel-${index}`,
+//   };
+// }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-    display: 'flex',
-    height: '100%',
-  },
-  tabs: {
-    borderRight: `1px solid ${theme.palette.divider}`,
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     flexGrow: 1,
+//     backgroundColor: theme.palette.background.paper,
+//     display: 'flex',
+//     height: '100%',
+//   },
+//   tabs: {
+//     borderRight: `1px solid ${theme.palette.divider}`,
+//   },
+//   TabPanel : {
+//     width : '100%',
+//     height : '100%'
+//   },
+//   Box : {
+//     height : '100%'
+//   },
+//   Typo : {
+//     height : '100%'
+//   }
+// }));
+
+
 
 export default function AddProblem(props) {
   const classes = useStyles();
@@ -105,11 +117,11 @@ export default function AddProblem(props) {
       <TabPanel value={value} index={1}>
         <AddEditor value={value} setCont={setCont} placeholder= '문제를 작성해 주세요.'></AddEditor>
       </TabPanel>
-      <TabPanel value={value} index={2}>
-        <AddEditor value={value} setTestcase={setTestcase} placeholder= '테스트케이스를 작성해 주세요.'></AddEditor>
+      <TabPanel value={value} index={2} className={classes.TabPanel} boxClass={classes.Box} typoClass={classes.Typo}>
+        <AddSourceEd value={value} setTestcase={setTestcase} placeholder= '테스트케이스를 작성해 주세요.'></AddSourceEd>
       </TabPanel>
-      <TabPanel value={value} index={5}>
-        <AddEditor value={value} setScore={setScore} placeholder= '점수를 작성해 주세요.'></AddEditor>
+      <TabPanel value={value} index={3} className={classes.TabPanel} boxClass={classes.Box} typoClass={classes.Typo}>
+        <AddSourceEd value={value} setScore={setScore} placeholder= '점수를 작성해 주세요.'></AddSourceEd>
       </TabPanel>
       <TabPanel index={6}>
         제출이 완료되었습니다.
