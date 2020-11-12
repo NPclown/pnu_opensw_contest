@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import '../assets/AddAll.css'
 import Button from '@material-ui/core/Button';
-import { propTypes } from 'react-bootstrap/esm/Image';
 import Addtest from './Addtest'
 import AddScore from './AddScore'
 

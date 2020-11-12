@@ -8,9 +8,6 @@ import Box from '@material-ui/core/Box';
 import 'codemirror/lib/codemirror.css';
 import AddEditor from '../components/AddEditor'
 import Axios from 'axios';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import AddSourceEd from '../components/AddSourceEd'
 import AddAll from '../components/AddAll'
 
 function TabPanel(props) {

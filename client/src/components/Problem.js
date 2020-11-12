@@ -1,6 +1,5 @@
 import React from 'react';
 import './Problem.css';
-// import 'katex/dist/katex.min.css';
 
 function Problem(props){
 

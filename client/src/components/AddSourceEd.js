@@ -1,7 +1,6 @@
-import React ,{useState, useEffect} from 'react';
-import Axios from 'axios';
+import React ,{useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUpload, faTools, faPlay, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faUpload, faTools, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, Form, FormGroup, Label, Input } from 'reactstrap';
 import Spacer from './Spacer';
 import '../assets/problemcode.css'
@@ -15,13 +14,10 @@ import 'codemirror/keymap/sublime'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/xml/xml';
 import '../components/Editor.css'
-import TestCaseModal from './TestCaseModal'
 
 function AddSourceEd (props){
-  const [id,setId] = useState(props.id)
   const [code,setCode] = useState("")
   const [language,setLanguage] = useState({name:"c",value:1})
-  const [testcase,setTestCase] = useState([])
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
   const radios = [

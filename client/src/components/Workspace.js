@@ -2,7 +2,6 @@ import React ,{useState} from 'react';
 import Split from 'react-split';
 import Editor from './Editor';
 import './Workspace.css';
-import AceContext from '../context/AceContext';
 
 function Workspace(props) {
   const [result,setResult] = useState({data:{}, isLoading:true})
