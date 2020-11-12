@@ -14,7 +14,6 @@ function AddEditor(props) {
             break
         case 1:
             props.setCont(editorRef.current.getInstance().getHtml())
-            console.log(editorRef.current.getInstance().getHtml())
             break
         case 2:
             props.setTestcase(editorRef.current.getInstance().getHtml())
