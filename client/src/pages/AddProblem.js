@@ -93,25 +93,25 @@ export default function AddProblem(props) {
         aria-label="Vertical tabs example"
         className={classes.tabs}
       >
-        <Tab label="문제이름" {...a11yProps(0)} />
+        <Tab label="제목 &amp; testcase &amp; score" {...a11yProps(0)} />
         <Tab label="문제내용" {...a11yProps(1)} />
-        <Tab label="테스트케이스" {...a11yProps(2)} />
-        <Tab label="점수" {...a11yProps(5)} />
-        <Tab label="제출하기" onClick ={(e)=>{toBackendAdd(e);alert("제출완료")}}{...a11yProps(6)} />
+        <Tab label="문제코드" {...a11yProps(2)} />
+        <Tab label="코드 초깃값" {...a11yProps(3)} />
+        <Tab label="제출하기" onClick ={(e)=>{toBackendAdd(e);alert("제출완료")}}{...a11yProps(4)} />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <AddAll></AddAll>
+        <AddAll value={value} setTitle={setTitle} setTestcase={setTestcase} setScore={setScore} ></AddAll>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <AddEditor value={value} setCont={setCont} placeholder= '문제를 작성해 주세요.'></AddEditor>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <AddEditor value={value} setTestcase={setTestcase} placeholder= '테스트케이스를 작성해 주세요.'></AddEditor>
+        <AddEditor value={value} setCode={setCode} placeholder= '테스트케이스를 작성해 주세요.'></AddEditor>
       </TabPanel>
-      <TabPanel value={value} index={5}>
-        <AddEditor value={value} setScore={setScore} placeholder= '점수를 작성해 주세요.'></AddEditor>
+      <TabPanel value={value} index={3}>
+        <AddEditor value={value} setInit={setInit}></AddEditor>
       </TabPanel>
-      <TabPanel index={6}>
+      <TabPanel index={4}>
         제출이 완료되었습니다.
       </TabPanel>
     </div>

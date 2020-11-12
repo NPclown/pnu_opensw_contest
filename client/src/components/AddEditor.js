@@ -16,17 +16,11 @@ function AddEditor(props) {
             props.setCont(editorRef.current.getInstance().getHtml())
             break
         case 2:
-            props.setTestcase(editorRef.current.getInstance().getHtml())
-            break
-        case 3:
             props.setCode(editorRef.current.getInstance().getHtml())
             break
-        case 4:
-            props.setInit(editorRef.current.getInstance().getHtml())
-            break
-        case 5:
-            props.setScore(editorRef.current.getInstance().getHtml())
-            break
+        case 3:
+          props.setInit(editorRef.current.getInstance().getHtml())
+          break
         }
   }
 
