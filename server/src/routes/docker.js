@@ -50,14 +50,14 @@ const languageSelect = (language) => {
             case 1:   //c
                 langaugeOptions = {
                     dockerImage : 'npclown/gcc:3.0',
-                    compile : 'cd tmp; gcc -o main.out *.c -O2 -Wall -lm --static -std=gnu99 -DONLINE_JUDGE',
+                    compile : 'cd tmp; gcc -o main.out *.c',
                     run : `cd tmp; ./main.out`
                 }
                 break;
             case 2:   //cpp
                 langaugeOptions = {
                     dockerImage : 'npclown/gcc:3.0',
-                    compile : 'cd tmp; g++ -o main.out *.cpp -O2 -Wall -lm --static -DONLINE_JUDGE',
+                    compile : 'cd tmp; g++ -o main.out *.cpp',
                     run : `cd tmp; ./main.out`
                 }
                 break;
@@ -260,7 +260,7 @@ router.post('/execution', postValidator, async(req, res, next) =>{
 
                         execute_result.push(execute)
                     }
-                    rimraf.sync(tmp_dir);
+                    // rimraf.sync(tmp_dir);
                     res.json({code : 0,
                         data : {
                             msg : "Success",

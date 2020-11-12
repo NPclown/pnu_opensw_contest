@@ -65,9 +65,11 @@ router.post('/workbooks', postValidator, (req,res) => {
             var workbook = new Workbook();
             workbook.id = cryptoRandomString({length:8});
             workbook.name = req.body.name;
+            workbook.cont = req.body.cont;
             workbook.inits = req.body.inits;
             workbook.code = req.body.code;
             workbook.score = req.body.score;
+            workbook.sample = req.body.sample;
             workbook.save()
             .then((item) => {
                 res.json({code: 0, data: { msg: "Information Register Successful", item : {id : item.id}}});

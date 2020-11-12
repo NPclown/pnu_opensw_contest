@@ -42,6 +42,7 @@ function Editor (props){
   const toBackEnd = async(e) => {
     e.preventDefault()
     try{
+      console.log(code)
       var tmp = await Axios.post(`/run/execution`,{id : id, language:language.value, code:code, testcase:testcase});
       props.setResultT({data: tmp.data.data.items, isLoading:false})
     } catch(error) {
@@ -106,9 +107,10 @@ function Editor (props){
                     id="language-select"
                     onChange = {(e)=>{setLanguage({name:radios[e.target.value-1].name ,
                         value:radios[e.target.value-1].value});setRadioValue(e.target.value)}}
+                    value={radioValue}
                     >
                     {radios.map((item,value) =>(
-                      <option name={item.name} value={item.value} select={`"${radioValue === item.value}"`}>
+                      <option name={item.name} value={item.value}>
                         {item.name}
                         </option>
                     ))}
