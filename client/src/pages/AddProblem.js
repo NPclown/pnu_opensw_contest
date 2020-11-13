@@ -93,7 +93,12 @@ export default function AddProblem(props) {
     var result2;
         try{
             result2 = await Axios.post(`/api/workbooks`,{name:title, 
-              cont:cont,inits:init, code: code, score: score,sample: testcase });
+              cont:cont,inits:init, code: code, score: score,sample: {testcase : testcase, schema: "string" }});
+              if(result2.data.code === 0){
+                alert("등록에 성공하였습니다!")
+              }else{
+                alert("등록에 실패하였습니다!")
+              }
         } catch(error) {
             alert(error)
         }
@@ -116,7 +121,7 @@ export default function AddProblem(props) {
         <Tab label="제출하기" onClick ={(e)=>{toBackendAdd(e);alert("제출완료")}}{...a11yProps(6)} />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <AddAll setTestcase={setTestcase} setTitle={setTitle} setScore={setScore}></AddAll>
+        <AddAll title={title} setTestcase={setTestcase} setTitle={setTitle} setScore={setScore}></AddAll>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <AddEditor value={value} setCont={setCont} cont={cont} placeholder= '문제를 작성해 주세요.'></AddEditor>

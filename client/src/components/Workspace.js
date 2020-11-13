@@ -18,7 +18,17 @@ function Workspace(props) {
                 ""
               ):(
                 result.data.state===1 ? (
-                  result.data.result.err
+                  result.data.result.map((problemresult, index)=>{
+                    return(
+                      <div>
+                        <div className="top-line">                
+                        결과: {problemresult.success?("성공"):("실패")}
+                        </div>
+                        <div>                
+                        런타임: {problemresult.err}
+                        </div>
+                      </div>
+                      )})
                 ) : (
                 <div>
                 {console.log(result)}

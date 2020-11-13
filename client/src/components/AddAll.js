@@ -37,7 +37,7 @@ export default function SimpleAccordion(props) {
         <AccordionDetails>
           <Typography>
           <div className ="makeStyles-root-171">
-              <input onChange={e => props.setTitle(e.target.value)}></input>
+              <input value={props.title} onChange={e => props.setTitle(e.target.value)}></input>
               </div>
           </Typography>
         </AccordionDetails>
