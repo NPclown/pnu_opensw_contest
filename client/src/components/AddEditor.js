@@ -29,9 +29,10 @@ function AddEditor(props) {
         <Editor
           previewStyle="vertical"
           height="400px"
-          initialEditType="markdown"
+          initialEditType="wysiwyg"
           placeholder= {props.placeholder}
           ref={editorRef}
+          initialValue={props.cont}
         />
         <Button onClick={()=>{handleClick(props.value);alert("등록완료")}} variant="contained" color="primary" disableElevation>
             저장

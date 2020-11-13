@@ -15,20 +15,11 @@ import 'codemirror/keymap/sublime'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/xml/xml';
 import '../components/Editor.css'
-import TestCaseModal from './TestCaseModal'
 
-function Editor (props){
-  const [id,setId] = useState(props.id)
-  const [code,setCode] = useState("")
+function AddInitEd (props){
+  const [code,setCode] = useState([{code : "//c\n#include <stdio.h>\n#include <stdbool.h>\n#include <stdlib.h>\n\n// 파라미터로 주어지는 문자열은 const로 주어집니다. 변경하려면 문자열을 복사해서 사용하세요.\nchar* solution(const char* s) {\n    // return 값은 malloc 등 동적 할당을 사용해주세요. 할당 길이는 상황에 맞게 변경해주세요.\n    char* answer = (char*)malloc(1);\n    return answer;\n}"},{code : "//cpp\n#include <string>\n#include <vector>\n\nusing namespace std;\n\nstring solution(string s) {\n    string answer = \"\";\n    return answer;\n}"},{code : "#python2\ndef solution(s):\n    answer = \'\' \n    return answer"},{code : "#python3\ndef solution(s):\n    answer = \'\' \n    return answer"}])
   const [language,setLanguage] = useState({name:"c",value:1})
-  const [testcase,setTestCase] = useState([])
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    setCode(props.data.inits[language.name])
-  },[language])
 
   const radios = [
     { name: 'c', value: 1 },
@@ -39,45 +30,33 @@ function Editor (props){
   const [radioValue, setRadioValue] = useState(1);
   const type ={'c': "text/x-csrc", 'cpp': "text/x-c++src", 'python': "python", 'python3': "python"}
 
-  const toBackEnd = async(e) => {
+  const handleClick = (e) => {
     e.preventDefault()
-    try{
-      console.log(code)
-      var tmp = await Axios.post(`/run/execution`,{id : id, language:language.value, code:code, testcase:testcase});
-      props.setResultT({data: tmp.data.data.items, isLoading:false})
-    } catch(error) {
-      alert(error)
-    }
+    props.setInit({
+      c : code[0].code,
+      cpp : code[1].code,
+      python : code[2].code,
+      python3 : code[3].code
+    })
+    alert("저장 완료!")
   }
-
-  const toBackEnd2 = async(e) => {
-    e.preventDefault()
-    try{
-      var tmp = await Axios.post(`/run/score`,{id : id, language:language.value, code:code});
-      props.setResult({data: tmp.data.data.items,isLoading:false})
-    } catch(error) {
-      alert(error)
-    }
-  }
+  useEffect(() => {
+    console.log(language)
+  },[language])
 
   return (
     <div className="editor-area">
       <div className="editor-menu">
-        <Button onClick = {e => {setCode(props.data.inits[language.name]);alert("초기화"); props.setResult({data: {},isLoading:true}); props.setResultT({data: {},isLoading:true})}}>
-          <FontAwesomeIcon icon={faUpload} /> reset
-        </Button>
         <Spacer></Spacer>
-        <Button onClick = {() => setShow(true)}>
-          <FontAwesomeIcon icon={faUpload} /> testcase
-        </Button>
-        <TestCaseModal {...props} show={show} setShow={setShow} testcase={testcase} setTestCase={setTestCase}>
-        </TestCaseModal>
       </div>
       
       <CodeMirror
-        value={code}
+        value={code[language.value-1].code}
         onChange={(editor,data,value)=>{
-            setCode(value.replace(/\n/ig, '\n'))
+            const tmp = [...code];
+            tmp[language.value-1].code = value.replace(/\n/ig, '\n');
+            console.log(tmp)
+            setCode(tmp)
         }}
         autoCursor={false}
         options={{
@@ -120,15 +99,11 @@ function Editor (props){
           </DropdownMenu>
         </ButtonDropdown>
         <Spacer/>
-        <Button onClick={e => {props.setResultT({data: {},isLoading:true}); props.setResult({data: {},isLoading:true}); toBackEnd2(e); alert("제출완료");}}>
-          <FontAwesomeIcon icon={faPlay} /> Run and Submit
-        </Button>
-        <Button onClick={e => {props.setResult({data: {},isLoading:true}); props.setResultT({data: {},isLoading:true}); toBackEnd(e); alert("테스트케이스");}}>
-          <FontAwesomeIcon icon={faCheck} /> Test
+        <Button onClick= {(e) => {handleClick(e)}}>
+          <FontAwesomeIcon icon={faCheck} /> 저장
         </Button>
       </div>
     </div>
   );
 }
-
-export default Editor;
+export default AddInitEd;
