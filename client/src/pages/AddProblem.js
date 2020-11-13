@@ -116,7 +116,7 @@ export default function AddProblem(props) {
         <Tab label="제출하기" onClick ={(e)=>{toBackendAdd(e);alert("제출완료")}}{...a11yProps(6)} />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <AddAll setTestscase={setTestscase} setTitle={setTitle} setScore={setScore}></AddAll>
+        <AddAll setTestcase={setTestcase} setTitle={setTitle} setScore={setScore}></AddAll>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <AddEditor value={value} setCont={setCont} cont={cont} placeholder= '문제를 작성해 주세요.'></AddEditor>
