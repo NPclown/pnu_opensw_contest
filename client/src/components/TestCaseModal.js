@@ -1,10 +1,38 @@
 import React, {useState} from 'react';
-import {Modal, Button} from 'react-bootstrap';
-import Table from 'react-bootstrap/Table'
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Modal from '@material-ui/core/Modal';
 import '../assets/testcasemodal.css'
 
+const useStyles = makeStyles((theme) => ({
+    table: {
+        width : '650px'
+    },
+    paper: {
+        position: 'absolute',
+        width: '750px',
+        left: '600px',
+        top : '200px',
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+    },    
+    button : {
+        marginTop : '30px',
+        marginLeft : '300px'
+    }
+  }));
+
+  
 function TestCaseModal(props) {
     const [inputList, setInputList] = useState([{ input: "", output:""}]);
+    const classes = useStyles();
 
     // handle input change
     const handleInputChange = (e, index) => {
@@ -31,29 +59,31 @@ function TestCaseModal(props) {
   
     return(
         <div className="TestCaseModal">
-            <Modal show={props.show} onHide={() => props.setShow(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter">
+            <Modal open={props.show} onClose={() => props.setShow(false)} aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description">
+            <div className={classes.paper}>
+                <div>
+                    <div id="contained-modal-title-vcenter">
                         테스트 케이스 추가
-                    </Modal.Title>
-                </Modal.Header>
-            <Modal.Body className="show-grid">                  
-                <Table striped bordered hover size="sm">
-                <thead>
-                    <tr>
-                    <th>{props.data.sample.schema}</th>
-                    <th>output</th>
-                    </tr>
-                </thead>
+                    </div>
+                </div>
+            <div className="show-grid">                  
+                <Table className={classes.table} aria-label='simple table'>
+                <TableHead>
+                    <TableRow>
+                    <TableCell>{props.data.sample.schema}</TableCell>
+                    <TableCell>output</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
                 {props.data.sample.testcase.map((testcase, index)=>{
                 return(
-                    <tbody key={index}>
-                        <tr>
-                        <td>{testcase.input}</td>
-                    <td>{testcase.output}</td>
-                    </tr>
-                </tbody>
+                    <TableRow key={index}>
+                        <TableCell>{testcase.input}</TableCell>
+                        <TableCell>{testcase.output}</TableCell>
+                    </TableRow>
                 )})}  
+                </TableBody>
                 </Table>
 
             {inputList.map((x, i) => {
@@ -63,29 +93,29 @@ function TestCaseModal(props) {
                     className="testcase-box"
                     name="input"
                     placeholder={props.data.sample.schema}
-                    value={x.firstName}
+                    value={x.input}
                     onChange={e => handleInputChange(e, i)}
                 />
                 <input
                     className="ml10"
                     name="output"
                     placeholder="Output"
-                    value={x.returnName}
+                    value={x.output}
                     onChange={e => handleInputChange(e, i)}
                 />
                     {inputList.length !== 1 && <Button
                     className="mr10"
-                    variant="outline-danger"
-                    size = 'sm'
+                    variant="outlined" color="primary" size ='small'
                     onClick={() => handleRemoveClick(i)}>Remove</Button>}
-                    {inputList.length - 1 === i && <Button variant="outline-success" size ='sm' onClick={handleAddClick}>Add</Button>}
+                    {inputList.length - 1 === i && <Button variant="outlined" color="primary" size ='small' onClick={handleAddClick}>Add</Button>}
                 </div>
             );
             })}
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={()=>props.setShow(false)} >Close</Button>
-      </Modal.Footer>
+      </div>
+      <div>
+        <Button className={classes.button} variant="outlined" color="primary" size ='small' onClick={()=>props.setShow(false)} >Close</Button>
+      </div>
+      </div>
       </Modal>
       </div>
     )

@@ -1,7 +1,6 @@
 import React ,{useState, useEffect} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTools, faCheck } from '@fortawesome/free-solid-svg-icons';
-import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, Form, FormGroup, Label, Input } from 'reactstrap';
 import Spacer from './Spacer';
 import '../assets/problemcode.css'
 import 'codemirror/keymap/sublime';
@@ -14,11 +13,32 @@ import 'codemirror/keymap/sublime'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/xml/xml';
 import '../components/Editor.css'
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Input from '@material-ui/core/Input';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+}));
 
 function AddHeaderEd (props){
   const [code,setCode] = useState(props.header)
   const [language,setLanguage] = useState({name:"c",value:1})
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+  const classes = useStyles();
 
   const radios = [
     { name: 'c', value: 1 },
@@ -64,34 +84,34 @@ function AddHeaderEd (props){
       </CodeMirror>
 
       <div className="editor-menu">
-        <ButtonDropdown isOpen={isRegisterOpen} toggle={() => setIsRegisterOpen(!isRegisterOpen)} direction="up">
-          <DropdownToggle>
-            <FontAwesomeIcon  icon={faTools} /> Settings
-          </DropdownToggle>
-          <DropdownMenu className="p-4">
-              <Form style={{ width: 300 }}>
-                <FormGroup className="form-row">
-                  <Label className="col-4 font-weight-bold" for="language-select">Language</Label>
-                  <Spacer width={6} />
-                  <Input
-                    className="col"
-                    bsSize="sm"
-                    type="select"
-                    id="language-select"
-                    onChange = {(e)=>{setLanguage({name:radios[e.target.value-1].name ,
-                        value:radios[e.target.value-1].value});setRadioValue(e.target.value)}}
-                    value={radioValue}
-                    >
-                    {radios.map((item,value) =>(
-                      <option name={item.name} value={item.value}>
-                        {item.name}
-                        </option>
-                    ))}
-                  </Input>
-                </FormGroup>
-              </Form>
-          </DropdownMenu>
-        </ButtonDropdown>
+        <Button onClick={() => setIsRegisterOpen(true)}><FontAwesomeIcon  icon={faTools} /> Settings</Button>
+        <Dialog disableBackdropClick disableEscapeKeyDown open={isRegisterOpen} onClose={() => setIsRegisterOpen(false)}>
+          <DialogTitle>Language</DialogTitle>
+          <DialogContent>
+            <form className={classes.container}>
+              <FormControl className={classes.formControl}>
+                <Select
+                  native
+                  value={radioValue}
+                  onChange={(e)=>{setLanguage({name:radios[e.target.value-1].name ,
+                  value:radios[e.target.value-1].value});setRadioValue(e.target.value)}}
+                  input={<Input id="demo-dialog-native" />}
+                >
+                {radios.map((item,value) =>(
+                        <option name={item.name} value={item.value}>
+                          {item.name}
+                          </option>
+                  ))}
+                </Select>
+              </FormControl>
+            </form>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setIsRegisterOpen(false)} color="primary">
+              Ok
+            </Button>
+          </DialogActions>
+        </Dialog>
         <Spacer/>
         <Button onClick= {(e) => {handleClick(e)}}>
           <FontAwesomeIcon icon={faCheck} /> 저장

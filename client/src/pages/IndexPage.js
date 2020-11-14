@@ -53,7 +53,7 @@ function IndexPage (props) {
             </CardContent>
             <CardActions>
               <Link to={`/workspace/${list.id}`}>
-                <Button size="small" variant="contained" color="primary">open</Button>
+                <Button size="small" variant="outlined" color="primary">open</Button>
               </Link>
             </CardActions>
             <Spacer width={6} />

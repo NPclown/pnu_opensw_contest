@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import  {Button} from 'react-bootstrap';
+import Button from '@material-ui/core/Button';
 
 function Addtest(props) {
     const [inputList, setInputList] = useState(props.testcase);
@@ -48,10 +48,9 @@ function Addtest(props) {
                 />
                     {inputList.length !== 1 && <Button
                     className="mr10"
-                    variant="outline-danger"
-                    size = 'sm'
+                    variant="outlined" color="primary" size ='small'
                     onClick={() => handleRemoveClick(i)}>Remove</Button>}
-                    {inputList.length - 1 === i && <Button variant="outline-success" size ='sm' onClick={handleAddClick}>Add</Button>}
+                    {inputList.length - 1 === i && <Button variant="outlined" color="primary" size ='small' onClick={handleAddClick}>Add</Button>}
                 </div>
             );
             })}

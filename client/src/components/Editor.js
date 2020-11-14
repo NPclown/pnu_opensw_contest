@@ -2,7 +2,6 @@ import React ,{useState, useEffect} from 'react';
 import Axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload, faTools, faPlay, faCheck } from '@fortawesome/free-solid-svg-icons';
-import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, Form, FormGroup, Label, Input } from 'reactstrap';
 import Spacer from './Spacer';
 import '../assets/problemcode.css'
 import 'codemirror/keymap/sublime';
@@ -16,6 +15,26 @@ import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/xml/xml';
 import '../components/Editor.css'
 import TestCaseModal from './TestCaseModal'
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Input from '@material-ui/core/Input';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+}));
 
 function Editor (props){
   const [id,setId] = useState(props.id)
@@ -25,6 +44,8 @@ function Editor (props){
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
   const [show, setShow] = useState(false);
+
+  const classes = useStyles();
 
   useEffect(() => {
     setCode(props.data.inits[language.name])
@@ -42,7 +63,6 @@ function Editor (props){
   const toBackEnd = async(e) => {
     e.preventDefault()
     try{
-      console.log(code)
       var tmp = await Axios.post(`/run/execution`,{id : id, language:language.value, code:code, testcase:testcase});
       props.setResultT({data: tmp.data.data.items, isLoading:false})
     } catch(error) {
@@ -63,11 +83,11 @@ function Editor (props){
   return (
     <div className="editor-area">
       <div className="editor-menu">
-        <Button onClick = {e => {setCode(props.data.inits[language.name]);alert("초기화"); props.setResult({data: {},isLoading:true}); props.setResultT({data: {},isLoading:true})}}>
+        <Button size="small" variant="outlined" onClick = {e => {setCode(props.data.inits[language.name]);alert("초기화"); props.setResult({data: {},isLoading:true}); props.setResultT({data: {},isLoading:true})}}>
           <FontAwesomeIcon icon={faUpload} /> reset
         </Button>
         <Spacer></Spacer>
-        <Button onClick = {() => setShow(true)}>
+        <Button variant="outlined" onClick = {() => setShow(true)}>
           <FontAwesomeIcon icon={faUpload} /> testcase
         </Button>
         <TestCaseModal {...props} show={show} setShow={setShow} testcase={testcase} setTestCase={setTestCase}>
@@ -91,34 +111,34 @@ function Editor (props){
       </CodeMirror>
 
       <div className="editor-menu">
-        <ButtonDropdown isOpen={isRegisterOpen} toggle={() => setIsRegisterOpen(!isRegisterOpen)} direction="up">
-          <DropdownToggle>
-            <FontAwesomeIcon  icon={faTools} /> Settings
-          </DropdownToggle>
-          <DropdownMenu className="p-4">
-              <Form style={{ width: 300 }}>
-                <FormGroup className="form-row">
-                  <Label className="col-4 font-weight-bold" for="language-select">Language</Label>
-                  <Spacer width={6} />
-                  <Input
-                    className="col"
-                    bsSize="sm"
-                    type="select"
-                    id="language-select"
-                    onChange = {(e)=>{setLanguage({name:radios[e.target.value-1].name ,
-                        value:radios[e.target.value-1].value});setRadioValue(e.target.value)}}
-                    value={radioValue}
-                    >
-                    {radios.map((item,value) =>(
+        <Button onClick={() => setIsRegisterOpen(true)}><FontAwesomeIcon  icon={faTools} /> Settings</Button>
+        <Dialog disableBackdropClick disableEscapeKeyDown open={isRegisterOpen} onClose={() => setIsRegisterOpen(false)}>
+        <DialogTitle>Language</DialogTitle>
+        <DialogContent>
+          <form className={classes.container}>
+            <FormControl className={classes.formControl}>
+              <Select
+                native
+                value={radioValue}
+                onChange={(e)=>{setLanguage({name:radios[e.target.value-1].name ,
+                value:radios[e.target.value-1].value});setRadioValue(e.target.value)}}
+                input={<Input id="demo-dialog-native" />}
+              >
+               {radios.map((item,value) =>(
                       <option name={item.name} value={item.value}>
                         {item.name}
                         </option>
-                    ))}
-                  </Input>
-                </FormGroup>
-              </Form>
-          </DropdownMenu>
-        </ButtonDropdown>
+                ))}
+              </Select>
+            </FormControl>
+          </form>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setIsRegisterOpen(false)} color="primary">
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
         <Spacer/>
         <Button onClick={e => {props.setResultT({data: {},isLoading:true}); props.setResult({data: {},isLoading:true}); toBackEnd2(e); alert("제출완료");}}>
           <FontAwesomeIcon icon={faPlay} /> Run and Submit
