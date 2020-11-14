@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-  Link,
-  NavLink as RRNavLink
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect, Link, NavLink as RRNavLink } from 'react-router-dom';
 import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import WorkspacePage from './pages/WorkspacePage';
 import IndexPage from './pages/IndexPage';
