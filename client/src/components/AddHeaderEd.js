@@ -15,28 +15,27 @@ import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/xml/xml';
 import '../components/Editor.css'
 
-function AddInitEd (props){
-  const [code,setCode] = useState(props.init)
+function AddHeaderEd (props){
+  const [code,setCode] = useState(props.header)
   const [language,setLanguage] = useState({name:"c",value:1})
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
   const radios = [
     { name: 'c', value: 1 },
-    { name: 'cpp', value: 2 },
-    { name: 'python', value: 3 },
-    { name: 'python3', value: 4 },
+    { name: 'cpp', value: 2 }
   ];
   const [radioValue, setRadioValue] = useState(1);
   const type ={'c': "text/x-csrc", 'cpp': "text/x-c++src", 'python': "python", 'python3': "python"}
 
   const handleClick = (e) => {
     e.preventDefault()
-    props.setInit(code)
+    props.setHeader(code)
     const tmp = [...props.complete];
-    tmp[2].state = true;
+    tmp[4].state = true;
     props.setComplete(tmp)
     alert("저장 완료!")
   }
+
   useEffect(() => {
   },[language])
 
@@ -51,7 +50,6 @@ function AddInitEd (props){
         onChange={(editor,data,value)=>{
             const tmp = [...code];
             tmp[language.value-1].code = value.replace(/\n/ig, '\n');
-            console.log(tmp)
             setCode(tmp)
         }}
         autoCursor={false}
@@ -102,4 +100,4 @@ function AddInitEd (props){
     </div>
   );
 }
-export default AddInitEd;
+export default AddHeaderEd;

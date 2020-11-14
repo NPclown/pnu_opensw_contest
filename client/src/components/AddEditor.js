@@ -7,21 +7,13 @@ import Button from '@material-ui/core/Button';
 function AddEditor(props) {
   const editorRef = React.useRef();
 
-  const handleClick = (index) =>{
-    switch (index){
-        case 0:
-            props.setTitle(editorRef.current.getInstance().getHtml())
-            break
-        case 1:
-            props.setCont(editorRef.current.getInstance().getHtml())
-            break
-        case 2:
-            props.setCode(editorRef.current.getInstance().getHtml())
-            break
-        case 3:
-          props.setInit(editorRef.current.getInstance().getHtml())
-          break
-        }
+  const handleClick = (e) =>{
+    e.preventDefault()
+    props.setCont(editorRef.current.getInstance().getHtml())
+    const tmp = [...props.complete];
+    tmp[1].state = true;
+    props.setComplete(tmp)
+    alert("등록 완료!")
   }
 
     return (
@@ -34,7 +26,7 @@ function AddEditor(props) {
           ref={editorRef}
           initialValue={props.cont}
         />
-        <Button onClick={()=>{handleClick(props.value);alert("등록완료")}} variant="contained" color="primary" disableElevation>
+        <Button onClick={(e)=>{handleClick(e)}} variant="contained" color="primary" disableElevation>
             저장
         </Button>
       </>

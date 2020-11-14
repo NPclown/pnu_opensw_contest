@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import  {Button} from 'react-bootstrap';
 
 function Addtest(props) {
-    const [inputList, setInputList] = useState([{ input: "", output:""}]);
+    const [inputList, setInputList] = useState(props.testcase);
 
     // handle input change
     const handleInputChange = (e, index) => {
@@ -11,7 +11,7 @@ function Addtest(props) {
         const list = [...inputList];
         list[index][name] = value;
         setInputList(list);
-        props.setTestcase(inputList)
+        props.setTestcase(list)
     };
 
     // handle click event of the Remove button
@@ -19,7 +19,7 @@ function Addtest(props) {
         const list = [...inputList];
         list.splice(index, 1);
         setInputList(list);
-        props.setTestcase(inputList)
+        props.setTestcase(list)
     };
     
     // handle click event of the Add button
@@ -36,14 +36,14 @@ function Addtest(props) {
                     className="testcase-box"
                     name="input"
                     placeholder="input"
-                    value={x.firstName}
+                    value={x.input}
                     onChange={e => handleInputChange(e, i)}
                 />
                 <input
                     className="ml10"
                     name="output"
                     placeholder="Output"
-                    value={x.returnName}
+                    value={x.output}
                     onChange={e => handleInputChange(e, i)}
                 />
                     {inputList.length !== 1 && <Button
