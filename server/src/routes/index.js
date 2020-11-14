@@ -6,9 +6,11 @@ const { check, validationResult } = require('express-validator');
 
 const postValidator = [
     check('name').exists().withMessage('name is not null'),
+    check('cont').exists().withMessage('cont is not null'),
     check('inits').exists().withMessage('inits is not null'),
     check('code').exists().withMessage('code is not null'),
-    check('score').exists().withMessage('score is not null')
+    check('score').exists().withMessage('score is not null'),
+    check('sample').exists().withMessage('sample is not null')
 ]
 
 router.get('/workbooks',async(req,res) => {
@@ -58,7 +60,6 @@ router.get('/workbooks/:workbook_id',async(req,res) => {
 router.post('/workbooks', postValidator, (req,res) => {
     try{
         const errors = validationResult(req).array();
-        console.log(req.body)
         if (errors.length > 0) {
             res.json({ code: 43, data: { msg: 'Validation errors', err: errors } });
         } else {
