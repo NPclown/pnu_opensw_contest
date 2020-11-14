@@ -58,16 +58,18 @@ router.get('/workbooks/:workbook_id',async(req,res) => {
 router.post('/workbooks', postValidator, (req,res) => {
     try{
         const errors = validationResult(req).array();
-
+        console.log(req.body)
         if (errors.length > 0) {
             res.json({ code: 43, data: { msg: 'Validation errors', err: errors } });
         } else {
             var workbook = new Workbook();
             workbook.id = cryptoRandomString({length:8});
             workbook.name = req.body.name;
+            workbook.cont = req.body.cont;
             workbook.inits = req.body.inits;
             workbook.code = req.body.code;
             workbook.score = req.body.score;
+            workbook.sample = req.body.sample;
             workbook.save()
             .then((item) => {
                 res.json({code: 0, data: { msg: "Information Register Successful", item : {id : item.id}}});

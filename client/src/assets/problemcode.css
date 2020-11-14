@@ -12,11 +12,28 @@
     margin-bottom:2px;
 }
 .codestyle{
-    color:#494c52;
+    background-color: #34435b;
+    color:#ffffff;
     padding-left:10px;
     font-weight: 700;
     font-size: 20px;
   }
 .CodeMirror{
-    height:200px !important;
+    position: absolute !important;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100% !important;
+}
+.react-codemirror2 {
+    flex: 1 1 auto;
+    margin-top: 0;
+    height: 100%;
+    position: relative;
+}
+
+.MuiTabPanel-root{
+    width: 500px;
+    height: 500px;
 }

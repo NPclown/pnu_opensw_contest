@@ -9,14 +9,14 @@
 .header {
     height: 60px;
     border: solid #b8b6b6;
-    border-radius: 3em ;
     font-size: 30px;
-    color: #494c52;
+    color: #ffffff;
     font-weight: 700;
     padding-left: 20px;
     padding-top: 3px;
     max-width: 1200px;
     min-width: 1190px;
+    background-color: #343a40;
 }
 .problem-number{
   position: absolute;

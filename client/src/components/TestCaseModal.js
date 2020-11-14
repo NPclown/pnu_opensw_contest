@@ -2,37 +2,36 @@ import React, {useState} from 'react';
 import {Modal, Button} from 'react-bootstrap';
 import Table from 'react-bootstrap/Table'
 import '../assets/testcasemodal.css'
+
 function TestCaseModal(props) {
     const [inputList, setInputList] = useState([{ input: "", output:""}]);
 
     // handle input change
     const handleInputChange = (e, index) => {
         e.preventDefault()
-      const { name, value } = e.target;
-      const list = [...inputList];
-      list[index][name] = value;
-      setInputList(list);
-      props.setTestCase(inputList)
+        const { name, value } = e.target;
+        const list = [...inputList];
+        list[index][name] = value;
+        setInputList(list);
+        props.setTestCase(inputList)
     };
 
-    
     // handle click event of the Remove button
     const handleRemoveClick = index => {
-      const list = [...inputList];
-      list.splice(index, 1);
-      setInputList(list);
-      props.setTestCase(list)
-      console.log(list)
+        const list = [...inputList];
+        list.splice(index, 1);
+        setInputList(list);
+        props.setTestCase(list)
     };
     
     // handle click event of the Add button
     const handleAddClick = () => {
-      setInputList([...inputList, { input: "",output:""}]);
+        setInputList([...inputList, { input: "",output:""}]);
     };
   
     return(
         <div className="TestCaseModal">
-            <Modal show={props.show} onHide={props.handleClose}>
+            <Modal show={props.show} onHide={() => props.setShow(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
                         테스트 케이스 추가
@@ -42,30 +41,28 @@ function TestCaseModal(props) {
                 <Table striped bordered hover size="sm">
                 <thead>
                     <tr>
-                    <th>{props.sample.schema}</th>
+                    <th>{props.data.sample.schema}</th>
                     <th>output</th>
                     </tr>
                 </thead>
-                {props.sample.testcase.map((testcase, index)=>{
+                {props.data.sample.testcase.map((testcase, index)=>{
                 return(
-                    <tbody>
+                    <tbody key={index}>
                         <tr>
                         <td>{testcase.input}</td>
                     <td>{testcase.output}</td>
                     </tr>
                 </tbody>
-                )
-                }
-                )}  
+                )})}  
                 </Table>
 
             {inputList.map((x, i) => {
             return (
-                <div className="box">
+                <div className="box" key={i}>
                 <input
                     className="testcase-box"
                     name="input"
-                    placeholder={props.sample.schema}
+                    placeholder={props.data.sample.schema}
                     value={x.firstName}
                     onChange={e => handleInputChange(e, i)}
                 />
@@ -87,7 +84,7 @@ function TestCaseModal(props) {
             })}
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={()=>props.handleClose(false)} >Close</Button>
+        <Button variant="secondary" onClick={()=>props.setShow(false)} >Close</Button>
       </Modal.Footer>
       </Modal>
       </div>

@@ -3,9 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-fontawesome": "^0.1.12",
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@toast-ui/react-editor": "^2.5.0",
     "@uiw/react-codemirror": "^3.0.1",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
@@ -17,7 +24,10 @@
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
+    "react-split": "^2.0.9",
     "react-split-pane": "^0.1.92",
+    "react-swipeable-views": "^0.13.9",
+    "reactstrap": "^8.7.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
@@ -47,5 +57,5 @@
   "devDependencies": {
     "@types/codemirror": "0.0.98"
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://164.125.234.232:5000"
 }
