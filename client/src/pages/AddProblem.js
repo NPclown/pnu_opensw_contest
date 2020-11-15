@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
     height : '100%'
   },
   Box : {
-    height : '100%'
+    height : '80%'
   },
   Typo : {
     height : '100%'
