@@ -7,7 +7,8 @@
 - 도커 이미지 다운로드
 
 	```
-	docker pull npclown/gcc:3.0 
+    cd server
+    docker build -t compiler:1.0 .
 	docker pull mongo
 	```
 - mongo db 실행
@@ -149,7 +150,17 @@ POST http://localhost:5000/api/workbooks
           "input" : "5 5",
           "output" : "5"
         }
-      ]
+      ],
+      "sample": {
+        "testcase": [
+            {
+                "_id": "5fa2b68d1f94700b1235e632",
+                "input": "3 4",
+                "output": "7"
+            }
+        ],
+        "schema": "a(int) b(int)"
+      }
     }
 ```
 
@@ -198,7 +209,17 @@ PATCH http://localhost:5000/api/workbooks/c135a57c
           "input" : "5 5",
           "output" : "5"
         }
-      ]
+      ],
+      "sample": {
+        "testcase": [
+            {
+                "_id": "5fa2b68d1f94700b1235e632",
+                "input": "3 4",
+                "output": "7"
+            }
+        ],
+        "schema": "a(int) b(int)"
+      }
     }
 ```
 

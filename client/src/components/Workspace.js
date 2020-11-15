@@ -1,7 +1,6 @@
 import React ,{useState} from 'react';
 import Split from 'react-split';
 import Editor from './Editor';
-import './Workspace.css';
 
 function Workspace(props) {
   const [result,setResult] = useState({data:{}, isLoading:true})
@@ -22,10 +21,10 @@ function Workspace(props) {
                     return(
                       <div>
                         <div className="top-line">                
-                        결과: {problemresult.success?("성공"):("실패")}
+                        <p><b>결과:</b>{problemresult.success?("성공"):("실패")}</p> 
                         </div>
                         <div>                
-                        런타임: {problemresult.err}
+                        <p><b>런타임:</b> {problemresult.err}</p>
                         </div>
                       </div>
                       )})
@@ -37,10 +36,10 @@ function Workspace(props) {
                 return(
                   <div>
                     <div className="top-line">                
-                    결과: {problemresult.success?("성공"):("실패")}
+                    <p><b>결과:</b>{problemresult.success?("성공"):("실패")}</p> 
                     </div>
                     <div>                
-                    런타임: {problemresult.time}
+                    <p><b>런타임:</b> {problemresult.err}</p>
                     </div>
                   </div>
                   )})}

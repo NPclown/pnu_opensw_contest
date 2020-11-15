@@ -3,8 +3,7 @@
     position: absolute;
 }
 .problem-scroll{
-    overflow-y: scroll;
-    height: 450px;
+    overflow-y: auto;
 }
 .reset-button{
     position: relative;

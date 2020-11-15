@@ -23,12 +23,6 @@ code {
   color: black;
 }
 
-.split-parent-horizontal {
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-}
-
 .gutter:hover {
   background: rgba(0, 0, 0, 0.03);
 }

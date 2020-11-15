@@ -49,27 +49,27 @@ const languageSelect = (language) => {
         switch(language){
             case 1:   //c
                 langaugeOptions = {
-                    dockerImage : 'npclown/gcc:3.0',
+                    dockerImage : 'compiler:1.0',
                     compile : 'cd tmp; gcc -o main.out *.c',
                     run : `cd tmp; ./main.out`
                 }
                 break;
             case 2:   //cpp
                 langaugeOptions = {
-                    dockerImage : 'npclown/gcc:3.0',
+                    dockerImage : 'compiler:1.0',
                     compile : 'cd tmp; g++ -o main.out *.cpp',
                     run : `cd tmp; ./main.out`
                 }
                 break;
             case 3:   //python
                 langaugeOptions = {
-                    dockerImage : 'npclown/gcc:3.0',
+                    dockerImage : 'compiler:1.0',
                     run : `cd tmp; python2 main.py`
                 }
                 break;
             case 4:   //python3
                 langaugeOptions = {
-                    dockerImage : 'npclown/gcc:3.0',
+                    dockerImage : 'compiler:1.0',
                     run : `cd tmp; python3 main.py`
                 }
                 break;
@@ -260,7 +260,7 @@ router.post('/execution', postValidator, async(req, res, next) =>{
 
                         execute_result.push(execute)
                     }
-                    // rimraf.sync(tmp_dir);
+                    rimraf.sync(tmp_dir);
                     res.json({code : 0,
                         data : {
                             msg : "Success",
@@ -284,7 +284,7 @@ router.post('/execution', postValidator, async(req, res, next) =>{
                     var execute = await dockerCreate(tmp_dir, options, index);
 
                     if(execute.state > 0){
-                        // rimraf.sync(tmp_dir);
+                        rimraf.sync(tmp_dir);
                         res.json({code : 21,
                             data : {
                                 msg : "Compile Error",
@@ -299,7 +299,7 @@ router.post('/execution', postValidator, async(req, res, next) =>{
 
                     execute_result.push(execute)
                 }
-                // rimraf.sync(tmp_dir);
+                rimraf.sync(tmp_dir);
                 res.json({code : 0,
                     data : {
                         msg : "Success",

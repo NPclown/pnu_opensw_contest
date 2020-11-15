@@ -1,13 +1,33 @@
 import React, { useState,useEffect } from 'react';
 import Split from 'react-split';
-import { Spinner } from 'reactstrap';
+import { makeStyles } from '@material-ui/core/styles';
+import {CircularProgress} from '@material-ui/core';
 import Problem from '../components/Problem';
-import './WorkspacePage.css';
 import Workspace from '../components/Workspace';
 import Axios from 'axios';
 
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    '& > * + *': {
+      marginLeft: theme.spacing(2),
+    },
+  },
+  splitParentHorizontal : {
+    display: 'flex',
+    flexDirection: 'row',
+    height: '100%',
+  },
+  problemPane : {
+    display: 'flex',
+    flexDirection: 'column'
+  }
+}));
+
 function WorkspacePage(props){
   const [state,setState]=useState({data:{}, isLoading:true})
+  const classes = useStyles();
 
   useEffect(() => {
     const getData = async() => {
@@ -23,8 +43,8 @@ function WorkspacePage(props){
   },[props.match.params.id])
 
   return state.isLoading ? (
-    <div className="d-flex h-100 align-items-center justify-content-center">
-      <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" />
+    <div className={classes.root}>
+      <CircularProgress />
     </div>
     ) : (
     <Split
@@ -32,9 +52,9 @@ function WorkspacePage(props){
     sizes={[50, 50]}
     minSize={0}
     gutterSize={12}
-    className="split-parent-horizontal"
+    className={classes.splitParentHorizontal}
     >
-      <div className="problem-pane">
+      <div className={classes.problemPane}>
         <Problem cont={state.data.cont} />
       </div>
       <Workspace id = {props.match.params.id} data = {state.data}/>

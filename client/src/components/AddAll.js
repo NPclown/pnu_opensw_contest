@@ -1,15 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
+import {Accordion, AccordionSummary, AccordionDetails, Typography, Button} from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import '../assets/AddAll.css'
-import Button from '@material-ui/core/Button';
 import Addtest from './Addtest'
 import AddScore from './AddScore'
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,10 +13,29 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
   },
-}));
+  Root171: {
+    width: '800px',
+  },
+  }));
 
 export default function SimpleAccordion(props) {
   const classes = useStyles();
+  const [title, setTitle] = useState(props.title);
+  const [schema, setSchema] = useState(props.schema);
+  const [testcase,setTestcase] =useState(props.testcase)
+  const [score,setScore] =useState(props.score)
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    props.setTitle(title)
+    props.setSchema(schema)
+    props.setTestcase(testcase)
+    props.setScore(score)
+    const tmp = [...props.complete];
+    tmp[0].state = true;
+    props.setComplete(tmp)
+    alert("등록 완료!")
+  }
 
   return (
     <div className={classes.root}>
@@ -36,8 +49,24 @@ export default function SimpleAccordion(props) {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
+          <div className ={classes.Root171}>
+              <input value={title} placeholder="문제 제목" onChange={e => setTitle(e.target.value)}></input>
+              </div>
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography className={classes.heading}>테스트케이스 입력 양식</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
           <div className ="makeStyles-root-171">
-              <input value={props.title} onChange={e => props.setTitle(e.target.value)}></input>
+              <input value={schema} placeholder="string string" onChange={e => setSchema(e.target.value)}></input>
               </div>
           </Typography>
         </AccordionDetails>
@@ -52,7 +81,8 @@ export default function SimpleAccordion(props) {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            <Addtest setTestcase={props.setTestcase}></Addtest>
+            
+            <Addtest testcase={testcase} setTestcase={setTestcase}></Addtest>
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -66,11 +96,11 @@ export default function SimpleAccordion(props) {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            <AddScore setScore={props.setScore}></AddScore>
+            <AddScore score={score} setScore={setScore}></AddScore>
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Button onClick={()=>{alert("등록완료")}} variant="contained" color="primary" disableElevation>
+      <Button onClick={(e)=>{handleClick(e)}} variant="contained" color="primary" disableElevation>
             저장
         </Button>
     </div>
