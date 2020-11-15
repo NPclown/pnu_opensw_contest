@@ -53,7 +53,7 @@ function Addtest(props) {
                 <input
                     className={classes.testcaseBox}
                     name="input"
-                    placeholder={props.data.sample.schema}
+                    placeholder="Input"
                     value={x.input}
                     onChange={e => handleInputChange(e, i)}
                 />

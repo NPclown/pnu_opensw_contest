@@ -66,6 +66,10 @@
     min-height: 200px;
     background: #eee;
     text-align:justify;
+    overflow: auto;
+    background-color: #d9e7ff;
+    font-size: 17px!important;
+  
 }
 .footer {
   max-width: 1200px;
@@ -157,7 +161,4 @@
   overflow-y: scroll;
   height: 250px;
 }
-.problem-result{
-  background-color: #d9e7ff;
-  font-size: 17px!important;
-}
+

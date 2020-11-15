@@ -16,6 +16,10 @@ const useStyles = makeStyles((theme) => ({
   Root171: {
     width: '800px',
   },
+  inputsize : {
+    height : '30px',
+    fontSize : '16px'
+  }
   }));
 
 export default function SimpleAccordion(props) {
@@ -50,7 +54,7 @@ export default function SimpleAccordion(props) {
         <AccordionDetails>
           <Typography>
           <div className ={classes.Root171}>
-              <input value={title} placeholder="문제 제목" onChange={e => setTitle(e.target.value)}></input>
+              <input className={classes.inputsize} value={title} placeholder="문제 제목" onChange={e => setTitle(e.target.value)}></input>
               </div>
           </Typography>
         </AccordionDetails>
@@ -66,7 +70,7 @@ export default function SimpleAccordion(props) {
         <AccordionDetails>
           <Typography>
           <div className ="makeStyles-root-171">
-              <input value={schema} placeholder="string string" onChange={e => setSchema(e.target.value)}></input>
+              <input className={classes.inputsize} value={schema} placeholder="string string" onChange={e => setSchema(e.target.value)}></input>
               </div>
           </Typography>
         </AccordionDetails>

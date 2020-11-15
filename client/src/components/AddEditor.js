@@ -19,7 +19,7 @@ function AddEditor(props) {
       <>
         <Editor
           previewStyle="vertical"
-          height="400px"
+          height="80vh"
           initialEditType="wysiwyg"
           placeholder= {props.placeholder}
           ref={editorRef}

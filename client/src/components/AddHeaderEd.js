@@ -91,8 +91,8 @@ function AddHeaderEd (props){
                   value:radios[e.target.value-1].value});setRadioValue(e.target.value)}}
                   input={<Input id="demo-dialog-native" />}
                 >
-                {radios.map((item,value) =>(
-                        <option name={item.name} value={item.value}>
+                {radios.map((item,index) =>(
+                        <option name={item.name} value={item.value} key={index}>
                           {item.name}
                           </option>
                   ))}

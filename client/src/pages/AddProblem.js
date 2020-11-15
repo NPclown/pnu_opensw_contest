@@ -58,10 +58,14 @@ const useStyles = makeStyles((theme) => ({
     height : '100%'
   },
   Box : {
-    height : '80%'
+    height : '80%',
+    width : '70%'
   },
   Typo : {
     height : '100%'
+  },
+  Editor : {
+    width : '900px'
   }
 }));
 
@@ -161,7 +165,7 @@ export default function AddProblem(props) {
       <TabPanel value={value} index={0}>
         <AddAll title={title} schema={schema} setSchema={setSchema} complete={complete} setComplete={setComplete} testcase={testcase} setTestcase={setTestcase} setTitle={setTitle} score={score} setScore={setScore}></AddAll>
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel value={value} index={1} typoClass={classes.Editor}>
         <AddEditor complete={complete} setComplete={setComplete} setCont={setCont} cont={cont} placeholder= '문제를 작성해 주세요.'></AddEditor>
       </TabPanel>
       <TabPanel value={value} index={2} className={classes.TabPanel} boxClass={classes.Box} typoClass={classes.Typo}>

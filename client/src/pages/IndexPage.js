@@ -57,7 +57,7 @@ function IndexPage (props) {
       <div className={classes.row}>
       {state.data.map((list, index)=>{
         return(
-          <Card className={classes.root}>
+          <Card className={classes.root} key={index}>
             <CardContent>
               <Typography className={classes.title} color="textSecondary" gutterBottom>
                 {list.name}

@@ -1,10 +1,21 @@
 import React ,{useState} from 'react';
 import Split from 'react-split';
 import Editor from './Editor';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  resultsView: {
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: 'auto'
+  },
+  }));
+
 
 function Workspace(props) {
   const [result,setResult] = useState({data:{}, isLoading:true})
   const [resultT,setResultT] = useState({data:{}, isLoading:true})
+  const classes = useStyles();
 
   return (
       <Split direction="vertical" sizes={[50, 50]} minSize={[100, 0]} gutterSize={4}>
@@ -12,7 +23,7 @@ function Workspace(props) {
           {...props}
           setResult={setResult} setResultT={setResultT}
         />
-        <div className="results-view">
+        <div className={classes.resultsView}>
           { Object.keys(result.data).length === 0?(
                 ""
               ):(
@@ -20,7 +31,7 @@ function Workspace(props) {
                   result.data.result.map((problemresult, index)=>{
                     return(
                       <div>
-                        <div className="top-line">                
+                        <div>                
                         <p><b>결과:</b>{problemresult.success?("성공"):("실패")}</p> 
                         </div>
                         <div>                
@@ -30,16 +41,15 @@ function Workspace(props) {
                       )})
                 ) : (
                 <div>
-                {console.log(result)}
                 점수: {result.data.score}
                 {result.data.result.map((problemresult, index)=>{
                 return(
                   <div>
-                    <div className="top-line">                
+                    <div>                
                     <p><b>결과:</b>{problemresult.success?("성공"):("실패")}</p> 
                     </div>
                     <div>                
-                    <p><b>런타임:</b> {problemresult.err}</p>
+                    <p><b>런타임:</b> {problemresult.time}</p>
                     </div>
                   </div>
                   )})}
@@ -54,7 +64,7 @@ function Workspace(props) {
                   {resultT.data.result.map((problemresult, index)=>{
                       return(
                         <div>
-                          <div className="top-line">                
+                          <div>                
                           <p><b>결과:</b>{problemresult.success?("성공"):("실패")}</p> 
                           </div>
                           <div>                
