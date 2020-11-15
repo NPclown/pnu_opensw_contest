@@ -3,7 +3,6 @@ import Split from 'react-split';
 import { makeStyles } from '@material-ui/core/styles';
 import {CircularProgress} from '@material-ui/core';
 import Problem from '../components/Problem';
-import './WorkspacePage.css';
 import Workspace from '../components/Workspace';
 import Axios from 'axios';
 
@@ -15,6 +14,15 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(2),
     },
   },
+  splitParentHorizontal : {
+    display: 'flex',
+    flexDirection: 'row',
+    height: '100%',
+  },
+  problemPane : {
+    display: 'flex',
+    flexDirection: 'column'
+  }
 }));
 
 function WorkspacePage(props){
@@ -44,9 +52,9 @@ function WorkspacePage(props){
     sizes={[50, 50]}
     minSize={0}
     gutterSize={12}
-    className="split-parent-horizontal"
+    className={classes.splitParentHorizontal}
     >
-      <div className="problem-pane">
+      <div className={classes.problemPane}>
         <Problem cont={state.data.cont} />
       </div>
       <Workspace id = {props.match.params.id} data = {state.data}/>
