@@ -88,6 +88,7 @@ export default function AddProblem(props) {
   const [header, setHeader] = useState([{code:"//c\nchar* solution(const char* s);"},{code : "//cpp\nstring solution(string s);"}])
   const [init,setInit] =useState([{code : "//c\n#include <stdio.h>\n#include <stdbool.h>\n#include <stdlib.h>\n\n// 파라미터로 주어지는 문자열은 const로 주어집니다. 변경하려면 문자열을 복사해서 사용하세요.\nchar* solution(const char* s) {\n    // return 값은 malloc 등 동적 할당을 사용해주세요. 할당 길이는 상황에 맞게 변경해주세요.\n    char* answer = (char*)malloc(1);\n    return answer;\n}"},{code : "//cpp\n#include <string>\n#include <vector>\n\nusing namespace std;\n\nstring solution(string s) {\n    string answer = \"\";\n    return answer;\n}"},{code : "#python2\ndef solution(s):\n    answer = \'\' \n    return answer"},{code : "#python3\ndef solution(s):\n    answer = \'\' \n    return answer"}])
   const [score,setScore] =useState([{input : "", output : ""}])
+  const [memory,setMemory] = useState("");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -129,6 +130,9 @@ export default function AddProblem(props) {
               sample: {
                 testcase : testcase,
                 schema: schema 
+              },
+              docker : {
+                memory : memory
               }
             });
             alert("제출완료");
@@ -163,7 +167,7 @@ export default function AddProblem(props) {
         <Tab label="제출하기" onClick ={(e)=>{toBackendAdd(e)}}{...a11yProps(5)} />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <AddAll title={title} schema={schema} setSchema={setSchema} complete={complete} setComplete={setComplete} testcase={testcase} setTestcase={setTestcase} setTitle={setTitle} score={score} setScore={setScore}></AddAll>
+        <AddAll title={title} schema={schema} setSchema={setSchema} complete={complete} setComplete={setComplete} testcase={testcase} setTestcase={setTestcase} setTitle={setTitle} score={score} setScore={setScore} memory={memory} setMemory={setMemory}></AddAll>
       </TabPanel>
       <TabPanel value={value} index={1} typoClass={classes.Editor}>
         <AddEditor complete={complete} setComplete={setComplete} setCont={setCont} cont={cont} placeholder= '문제를 작성해 주세요.'></AddEditor>

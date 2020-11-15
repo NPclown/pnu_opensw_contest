@@ -137,11 +137,18 @@ const dockerCreate = (tmp_dir, options, index) => {
                 var state = await container.inspect();
                 await container.remove();
 
-                if(index == undefined | state.State.ExitCode != 0){
+                if(index == undefined | state.State.ExitCode === 1){
                     resolve({
                         state : state.State.ExitCode,
                         result : {
                             err : logs
+                        }
+                    })
+                }else if(state.State.ExitCode === 137){
+                    resolve({
+                        state : state.State.ExitCode,
+                        result : {
+                            err : "메모리 에러"
                         }
                     })
                 }else{
@@ -230,6 +237,7 @@ router.post('/execution', postValidator, async(req, res, next) =>{
             options.HostConfig = {
                 'Binds': [src + ':' + dis]
             }
+            options.HostConfig.Memory = 10485760
 
             // complie
             if(language < 3){
@@ -261,17 +269,32 @@ router.post('/execution', postValidator, async(req, res, next) =>{
                         execute_result.push(execute)
                     }
                     rimraf.sync(tmp_dir);
-                    res.json({code : 0,
-                        data : {
-                            msg : "Success",
-                            items : {
-                                state : 0,
-                                success : count,
-                                total : testcase.length,
-                                result : execute_result
+                    
+                    if(execute_result[0].state === 137){
+                        res.json({code : 137,
+                            data : {
+                                msg : "Memory",
+                                items : {
+                                    state : 137,
+                                    success : count,
+                                    total : testcase.length,
+                                    result : execute_result
+                                }
                             }
-                        }
-                    })
+                        })
+                    }else{
+                        res.json({code : 0,
+                            data : {
+                                msg : "Success",
+                                items : {
+                                    state : 0,
+                                    success : count,
+                                    total : testcase.length,
+                                    result : execute_result
+                                }
+                            }
+                        })
+                    }
                 }
             }else{
                 var execute_result = [];

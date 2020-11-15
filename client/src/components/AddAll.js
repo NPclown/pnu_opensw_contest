@@ -18,7 +18,8 @@ const useStyles = makeStyles((theme) => ({
   },
   inputsize : {
     height : '30px',
-    fontSize : '16px'
+    fontSize : '16px',
+    marginBottom : '10px'
   }
   }));
 
@@ -26,8 +27,10 @@ export default function SimpleAccordion(props) {
   const classes = useStyles();
   const [title, setTitle] = useState(props.title);
   const [schema, setSchema] = useState(props.schema);
-  const [testcase,setTestcase] =useState(props.testcase)
-  const [score,setScore] =useState(props.score)
+  const [testcase,setTestcase] =useState(props.testcase);
+  const [score,setScore] =useState(props.score);
+  const [memory,setMemory] = useState(props.memory);
+
 
   const handleClick = (e) => {
     e.preventDefault()
@@ -35,6 +38,7 @@ export default function SimpleAccordion(props) {
     props.setSchema(schema)
     props.setTestcase(testcase)
     props.setScore(score)
+    props.setMemory(memory)
     const tmp = [...props.complete];
     tmp[0].state = true;
     props.setComplete(tmp)
@@ -101,6 +105,22 @@ export default function SimpleAccordion(props) {
         <AccordionDetails>
           <Typography>
             <AddScore score={score} setScore={setScore}></AddScore>
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography className={classes.heading}>도커 사용량 제어</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+          <div className ={classes.Root171}>
+              <input className={classes.inputsize} value={memory} placeholder="메모리 사용량 (MB 단위)" onChange={e => setMemory(e.target.value)}></input>
+          </div>
           </Typography>
         </AccordionDetails>
       </Accordion>

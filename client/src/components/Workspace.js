@@ -56,8 +56,34 @@ function Workspace(props) {
               </div>))}
               {Object.keys(resultT.data).length === 0?(
                 ""
-              ):(resultT.data.state===1 ? (
-                resultT.data.result.err
+              ):(resultT.data.state>0 ? (
+                resultT.data.state === 137 ? (
+                <div>
+                <div className="p-2">
+                  {resultT.data.result.map((problemresult, index)=>{
+                      return(
+                        <div>
+                          <div>                
+                          <p><b>결과:</b>"실패"</p> 
+                          </div>
+                          <div>                      
+                          <p><b>실행결과:</b> {problemresult.result.err}</p>
+                          </div>
+                        </div>
+                      )
+                  })}
+                </div>
+                </div>
+                ) : (
+                  <div>
+                      <div>                
+                          <p><b>컴파일 에러</b></p> 
+                        </div>
+                          <div>                      
+                          <p>{resultT.data.result.err}</p>
+                      </div>
+                  </div>
+                )
               ) : (
                 <div>
                 <div className="p-2">
@@ -76,8 +102,11 @@ function Workspace(props) {
                           <div>                
                           <p><b>실행결과:</b> {problemresult.result}</p>
                           </div>
-                          <div>                
-                          {problemresult.prints}
+                          <div>  
+                          {problemresult.prints ? (<p><b>실행결과:</b> {problemresult.prints} </p>) : ('')}              
+                          </div>
+                          <div>
+                            <p><b>-----------------------------------------------------------------------</b></p>
                           </div>
                         </div>
                       )
