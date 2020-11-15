@@ -1,6 +1,7 @@
 .results-view {
   display: flex;
   flex-direction: column;
+  overflow: auto
 }
 
 .results-view .nav-tabs {

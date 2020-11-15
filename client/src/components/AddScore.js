@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import {Button} from '@material-ui/core';
 
-
-
 function AddScore(props) {
     const [inputList, setInputList] = useState(props.score);
 

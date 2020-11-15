@@ -2,11 +2,8 @@ import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Accordion, AccordionSummary, AccordionDetails, Typography, Button} from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
 import Addtest from './Addtest'
 import AddScore from './AddScore'
-
-import '../assets/AddAll.css'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,9 +13,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
   },
-}));
-
-
+  Root171: {
+    width: '800px',
+  },
+  }));
 
 export default function SimpleAccordion(props) {
   const classes = useStyles();
@@ -51,7 +49,7 @@ export default function SimpleAccordion(props) {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-          <div className ="makeStyles-root-171">
+          <div className ={classes.Root171}>
               <input value={title} placeholder="문제 제목" onChange={e => setTitle(e.target.value)}></input>
               </div>
           </Typography>
