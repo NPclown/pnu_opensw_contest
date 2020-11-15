@@ -1,10 +1,26 @@
 import React, {useState} from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import {Button} from '@material-ui/core';
 
-
+const useStyles = makeStyles((theme) => ({
+    testcaseBox : {
+        width:'415px',
+        height : '30px',
+        fontSize : '16px'
+    },
+    ml10 : {
+        marginLeft : '10px',
+        height : '30px',
+        fontSize : '16px'
+    },
+    mr10 : {
+        marginRight : '10px',
+    }
+  }));
 
 function AddScore(props) {
     const [inputList, setInputList] = useState(props.score);
+    const classes = useStyles();
 
     // handle input change
     const handleInputChange = (e, index) => {
@@ -35,21 +51,21 @@ function AddScore(props) {
             return (
                 <div className="box" key={i}>
                 <input
-                    className="testcase-box"
+                    className={classes.testcaseBox}
                     name="input"
-                    placeholder="input"
+                    placeholder={props.data.sample.schema}
                     value={x.input}
                     onChange={e => handleInputChange(e, i)}
                 />
                 <input
-                    className="ml10"
+                    className={classes.ml10}
                     name="output"
                     placeholder="Output"
                     value={x.output}
                     onChange={e => handleInputChange(e, i)}
                 />
                     {inputList.length !== 1 && <Button
-                    className="mr10"
+                    className={classes.mr10}
                     variant="outlined" color="primary" size ='small'
                     onClick={() => handleRemoveClick(i)}>Remove</Button>}
                     {inputList.length - 1 === i && <Button variant="outlined" color="primary" size ='small' onClick={handleAddClick}>Add</Button>}

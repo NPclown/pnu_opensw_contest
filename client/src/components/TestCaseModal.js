@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
-import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import {Table, TableBody, TableCell, TableHead, TableRow, Modal} from '@material-ui/core';
-import '../assets/testcasemodal.css'
+import {Button, Table, TableBody, TableCell, TableHead, TableRow, Modal} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     table: {
-        width : '650px'
+        width : '735px',
+        fontSize : '16px'
     },
     paper: {
         position: 'absolute',
@@ -21,6 +20,23 @@ const useStyles = makeStyles((theme) => ({
     button : {
         marginTop : '30px',
         marginLeft : '300px'
+    },
+    testcaseBox : {
+        width:'415px',
+        height : '30px',
+        fontSize : '16px'
+    },
+    modalContent : {
+        width: '735px !important',
+        marginLeft : '-70px'
+    },
+    ml10 : {
+        marginLeft : '10px',
+        height : '30px',
+        fontSize : '16px'
+    },
+    mr10 : {
+        marginRight : '10px',
     }
   }));
 
@@ -55,7 +71,7 @@ function TestCaseModal(props) {
     return(
         <div className="TestCaseModal">
             <Modal open={props.show} onClose={() => props.setShow(false)} aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description">
+        aria-describedby="simple-modal-description" className={classes.modalContent}>
             <div className={classes.paper}>
                 <div>
                     <div id="contained-modal-title-vcenter">
@@ -66,16 +82,16 @@ function TestCaseModal(props) {
                 <Table className={classes.table} aria-label='simple table'>
                 <TableHead>
                     <TableRow>
-                    <TableCell>{props.data.sample.schema}</TableCell>
-                    <TableCell>output</TableCell>
+                    <TableCell size='medium'>{props.data.sample.schema}</TableCell>
+                    <TableCell size='medium'>output</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                 {props.data.sample.testcase.map((testcase, index)=>{
                 return(
                     <TableRow key={index}>
-                        <TableCell>{testcase.input}</TableCell>
-                        <TableCell>{testcase.output}</TableCell>
+                        <TableCell size='medium'>{testcase.input}</TableCell>
+                        <TableCell size='medium'>{testcase.output}</TableCell>
                     </TableRow>
                 )})}  
                 </TableBody>
@@ -85,21 +101,21 @@ function TestCaseModal(props) {
             return (
                 <div className="box" key={i}>
                 <input
-                    className="testcase-box"
+                    className={classes.testcaseBox}
                     name="input"
                     placeholder={props.data.sample.schema}
                     value={x.input}
                     onChange={e => handleInputChange(e, i)}
                 />
                 <input
-                    className="ml10"
+                    className={classes.ml10}
                     name="output"
                     placeholder="Output"
                     value={x.output}
                     onChange={e => handleInputChange(e, i)}
                 />
                     {inputList.length !== 1 && <Button
-                    className="mr10"
+                    className={classes.mr10}
                     variant="outlined" color="primary" size ='small'
                     onClick={() => handleRemoveClick(i)}>Remove</Button>}
                     {inputList.length - 1 === i && <Button variant="outlined" color="primary" size ='small' onClick={handleAddClick}>Add</Button>}

@@ -1,7 +1,6 @@
 import React ,{useState} from 'react';
 import Split from 'react-split';
 import Editor from './Editor';
-import './Workspace.css';
 
 function Workspace(props) {
   const [result,setResult] = useState({data:{}, isLoading:true})
