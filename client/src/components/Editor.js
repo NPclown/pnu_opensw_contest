@@ -16,14 +16,8 @@ import 'codemirror/mode/xml/xml';
 import '../components/Editor.css'
 import TestCaseModal from './TestCaseModal'
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Input from '@material-ui/core/Input';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Input, FormControl, Select} from '@material-ui/core';
+
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -113,32 +107,32 @@ function Editor (props){
       <div className="editor-menu">
         <Button onClick={() => setIsRegisterOpen(true)}><FontAwesomeIcon  icon={faTools} /> Settings</Button>
         <Dialog disableBackdropClick disableEscapeKeyDown open={isRegisterOpen} onClose={() => setIsRegisterOpen(false)}>
-        <DialogTitle>Language</DialogTitle>
-        <DialogContent>
-          <form className={classes.container}>
-            <FormControl className={classes.formControl}>
-              <Select
-                native
-                value={radioValue}
-                onChange={(e)=>{setLanguage({name:radios[e.target.value-1].name ,
-                value:radios[e.target.value-1].value});setRadioValue(e.target.value)}}
-                input={<Input id="demo-dialog-native" />}
-              >
-               {radios.map((item,value) =>(
-                      <option name={item.name} value={item.value}>
-                        {item.name}
-                        </option>
-                ))}
-              </Select>
-            </FormControl>
-          </form>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setIsRegisterOpen(false)} color="primary">
-            Ok
-          </Button>
-        </DialogActions>
-      </Dialog>
+          <DialogTitle>Language</DialogTitle>
+          <DialogContent>
+            <form className={classes.container}>
+              <FormControl className={classes.formControl}>
+                <Select
+                  native
+                  value={radioValue}
+                  onChange={(e)=>{setLanguage({name:radios[e.target.value-1].name ,
+                  value:radios[e.target.value-1].value});setRadioValue(e.target.value)}}
+                  input={<Input id="demo-dialog-native" />}
+                >
+                {radios.map((item,value) =>(
+                        <option name={item.name} value={item.value}>
+                          {item.name}
+                          </option>
+                  ))}
+                </Select>
+              </FormControl>
+            </form>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setIsRegisterOpen(false)} color="primary">
+              Ok
+            </Button>
+          </DialogActions>
+        </Dialog>
         <Spacer/>
         <Button onClick={e => {props.setResultT({data: {},isLoading:true}); props.setResult({data: {},isLoading:true}); toBackEnd2(e); alert("제출완료");}}>
           <FontAwesomeIcon icon={faPlay} /> Run and Submit

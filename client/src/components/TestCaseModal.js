@@ -1,12 +1,7 @@
 import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Modal from '@material-ui/core/Modal';
+import {Table, TableBody, TableCell, TableHead, TableRow, Modal} from '@material-ui/core';
 import '../assets/testcasemodal.css'
 
 const useStyles = makeStyles((theme) => ({

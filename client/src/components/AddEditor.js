@@ -1,8 +1,7 @@
-import 'codemirror/lib/codemirror.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import React from 'react'
 import { Editor } from '@toast-ui/react-editor';
-import Button from '@material-ui/core/Button';
+import {Button} from '@material-ui/core';
 
 function AddEditor(props) {
   const editorRef = React.useRef();

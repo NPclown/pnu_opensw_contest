@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Button from '@material-ui/core/Button';
+import {Button} from '@material-ui/core';
 
 function Addtest(props) {
     const [inputList, setInputList] = useState(props.testcase);

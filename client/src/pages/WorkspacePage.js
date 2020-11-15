@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import Split from 'react-split';
 import { makeStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import {CircularProgress} from '@material-ui/core';
 import Problem from '../components/Problem';
 import './WorkspacePage.css';
 import Workspace from '../components/Workspace';
