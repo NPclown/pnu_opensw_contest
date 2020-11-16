@@ -34,7 +34,10 @@ const workbookSchema = mongoose.Schema({
           input : String,
           output : String
       }
-  ]
+  ],
+  docker: {
+    memory : Number
+  }
 })
 
 

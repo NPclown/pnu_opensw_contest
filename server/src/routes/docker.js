@@ -175,11 +175,18 @@ const dockerScore = (tmp_dir, options, index) => {
                 var state = await container.inspect();
                 await container.remove();
 
-                if(index == undefined | state.State.ExitCode != 0){
+                if(index == undefined | state.State.ExitCode === 1){
                     resolve({
                         state : state.State.ExitCode,
                         success : false,
-                        err : "런타임 에러"
+                        err : "컴파일 에러"
+                    })
+                }else if(state.State.ExitCode === 137){
+                    resolve({
+                        state : state.State.ExitCode,
+                        result : {
+                            err : "메모리 에러"
+                        }
                     })
                 }else{
                     var result = fs.readFileSync(`${tmp_dir}/${index}.rst`,'utf-8').split('\n');
@@ -237,7 +244,7 @@ router.post('/execution', postValidator, async(req, res, next) =>{
             options.HostConfig = {
                 'Binds': [src + ':' + dis]
             }
-            options.HostConfig.Memory = 10485760
+            options.HostConfig.Memory = 10485760*parseInt(workbook.docker.memory)
 
             // complie
             if(language < 3){
@@ -323,17 +330,32 @@ router.post('/execution', postValidator, async(req, res, next) =>{
                     execute_result.push(execute)
                 }
                 rimraf.sync(tmp_dir);
-                res.json({code : 0,
-                    data : {
-                        msg : "Success",
-                        items : {
-                            state : 0,
-                            success : count,
-                            total : testcase.length,
-                            result : execute_result
+
+                if(execute_result[0].state === 137){
+                    res.json({code : 137,
+                        data : {
+                            msg : "Memory",
+                            items : {
+                                state : 137,
+                                success : count,
+                                total : testcase.length,
+                                result : execute_result
+                            }
                         }
-                    }
-                })
+                    })
+                }else{
+                    res.json({code : 0,
+                        data : {
+                            msg : "Success",
+                            items : {
+                                state : 0,
+                                success : count,
+                                total : testcase.length,
+                                result : execute_result
+                            }
+                        }
+                    })
+                }
             }
         }
     }catch(err){
@@ -385,6 +407,8 @@ router.post('/score', async(req, res, next) =>{
             options.HostConfig = {
                 'Binds': [src + ':' + dis]
             }
+            options.HostConfig.Memory = 10485760*parseInt(workbook.docker.memory)
+
 
             // complie
             if(language < 3){
@@ -420,16 +444,29 @@ router.post('/score', async(req, res, next) =>{
                         execute_result.push(execute)
                     }
                     rimraf.sync(tmp_dir);
-                    res.json({code : 0,
-                        data : {
-                            msg : "Success",
-                            items : {
-                                statue : 0,
-                                score : (count*100/scoreCase.length).toFixed(1),
-                                result : execute_result
+                    if(execute_result[0].state === 137){
+                        res.json({code : 137,
+                            data : {
+                                msg : "Memory",
+                                items : {
+                                    state : 137,
+                                    score : 0,
+                                    result : execute_result
+                                }
                             }
-                        }
-                    })
+                        })
+                    }else{
+                        res.json({code : 0,
+                            data : {
+                                msg : "Success",
+                                items : {
+                                    statue : 0,
+                                    score : (count*100/scoreCase.length).toFixed(1),
+                                    result : execute_result
+                                }
+                            }
+                        })
+                    }
                 }
             }else{
                 var execute_result = [];
@@ -461,16 +498,29 @@ router.post('/score', async(req, res, next) =>{
                     execute_result.push(execute)
                 }
                 rimraf.sync(tmp_dir);
-                res.json({code : 0,
-                    data : {
-                        msg : "Success",
-                        items : {
-                            statue : 0,
-                            score : (count*100/scoreCase.length).toFixed(1),
-                            result : execute_result
+                if(execute_result[0].state === 137){
+                    res.json({code : 137,
+                        data : {
+                            msg : "Memory",
+                            items : {
+                                state : 137,
+                                score : 0,
+                                result : execute_result
+                            }
                         }
-                    }
-                })
+                    })
+                }else{
+                    res.json({code : 0,
+                        data : {
+                            msg : "Success",
+                            items : {
+                                statue : 0,
+                                score : (count*100/scoreCase.length).toFixed(1),
+                                result : execute_result
+                            }
+                        }
+                    })
+                }
             }
         }
     }catch(err){

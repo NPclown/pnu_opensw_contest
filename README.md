@@ -4,8 +4,6 @@
 
 ## 요구사항
 
-프로젝트 실행에 필수적인 것들을 적어주세요.
-
 - [Node.js](https://nodejs.org/) >= 14.x
 - [Yarn](https://classic.yarnpkg.com/en/)
 - [Docker CE](https://www.docker.com/)
@@ -16,8 +14,9 @@
 - 도커 이미지 다운로드
 
 ```
-$ docker pull npclown/gcc:3.0 
-$ docker pull mongo
+cd server
+docker build -t compiler:1.0 .
+docker pull mongo
 ```
 - mongo db 실행
 
@@ -36,7 +35,6 @@ $ cp env .env
 
 - Backend 실행
 
-
 ```
 $ cd server
 $ yarn
@@ -50,6 +48,10 @@ $ cd client
 $ yarn
 $ yarn start
 ```
+
+## 서버 API
+
+[백엔드 API](./server/README.md)
 
 ## 참여인원
 

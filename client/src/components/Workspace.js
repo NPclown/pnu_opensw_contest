@@ -27,30 +27,73 @@ function Workspace(props) {
           { Object.keys(result.data).length === 0?(
                 ""
               ):(
-                result.data.state===1 ? (
-                  result.data.result.map((problemresult, index)=>{
-                    return(
+                result.data.state>0? (
+                  result.data.state === 137 ? (
+                  <div>
+                    <div className="p-2">
+                    <p><b>점수: {result.data.score}</b></p>
+                    <div>
+                      <p><b>-----------------------------------------------------------------------</b></p>
+                    </div>                    
+                      {result.data.result.map((problemresult, index)=>{
+                          return(
+                            <div key={index}>
+                              <div>                
+                              <p><b>결과:</b>"실패"</p> 
+                              </div>
+                              <div>                      
+                              <p><b>런타임:</b> {problemresult.result.err}</p>
+                              </div>
+                              <div>
+                                <p><b>-----------------------------------------------------------------------</b></p>
+                              </div>
+                            </div>
+                          )
+                      })}
+                    </div>
+                  </div>
+                  ):(
+                    <div>
+                    <div className="p-2">
+                      <p><b>점수: {result.data.score}</b></p>
                       <div>
-                        <div>                
-                        <p><b>결과:</b>{problemresult.success?("성공"):("실패")}</p> 
-                        </div>
-                        <div>                
-                        <p><b>런타임:</b> {problemresult.err}</p>
-                        </div>
+                        <p><b>-----------------------------------------------------------------------</b></p>
                       </div>
-                      )})
+                    {result.data.result.map((problemresult, index)=>{
+                      return(
+                        <div key={index}>
+                          <div>                
+                          <p><b>결과:</b>{problemresult.success?("성공"):("실패")}</p> 
+                          </div>
+                          <div>                
+                          <p><b>런타임:</b> {problemresult.err}</p>
+                          </div>
+                          <div>
+                            <p><b>-----------------------------------------------------------------------</b></p>
+                          </div>
+                        </div>
+                        )})}
+                      </div>
+                    </div>
+                  )
                 ) : (
                 <div>
-                점수: {result.data.score}
+                <p><b>점수: {result.data.score}</b></p>
+                <div>
+                  <p><b>-----------------------------------------------------------------------</b></p>
+                </div>                
                 {result.data.result.map((problemresult, index)=>{
                 return(
-                  <div>
+                  <div key={index}>
                     <div>                
                     <p><b>결과:</b>{problemresult.success?("성공"):("실패")}</p> 
                     </div>
                     <div>                
                     <p><b>런타임:</b> {problemresult.time}</p>
                     </div>
+                    <div>
+                      <p><b>-----------------------------------------------------------------------</b></p>
+                    </div>  
                   </div>
                   )})}
               </div>))}
@@ -62,12 +105,15 @@ function Workspace(props) {
                 <div className="p-2">
                   {resultT.data.result.map((problemresult, index)=>{
                       return(
-                        <div>
+                        <div key={index}>
                           <div>                
                           <p><b>결과:</b>"실패"</p> 
                           </div>
                           <div>                      
                           <p><b>실행결과:</b> {problemresult.result.err}</p>
+                          </div>
+                          <div>
+                            <p><b>-----------------------------------------------------------------------</b></p>
                           </div>
                         </div>
                       )
@@ -89,7 +135,7 @@ function Workspace(props) {
                 <div className="p-2">
                   {resultT.data.result.map((problemresult, index)=>{
                       return(
-                        <div>
+                        <div key={index}>
                           <div>                
                           <p><b>결과:</b>{problemresult.success?("성공"):("실패")}</p> 
                           </div>

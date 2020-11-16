@@ -160,6 +160,9 @@ POST http://localhost:5000/api/workbooks
             }
         ],
         "schema": "a(int) b(int)"
+      },
+      "docker" : {
+          "memory" : 10
       }
     }
 ```
@@ -219,6 +222,9 @@ PATCH http://localhost:5000/api/workbooks/c135a57c
             }
         ],
         "schema": "a(int) b(int)"
+      },
+      "docker" : {
+          "memory" : 10
       }
     }
 ```
@@ -407,7 +413,7 @@ POST http://localhost:5000/run/score
 }
 ```
 --
-### 테스트 케이스 API (작업중)
+### 테스트 케이스 API (추후 작성 예정)
 
 | HTTP verbs | Route  | CRUD|
 | ----------- |----------- |----------- |

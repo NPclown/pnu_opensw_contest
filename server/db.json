@@ -48,7 +48,10 @@
           "input" : "5 3",
           "output" : "12"
         }
-      ]
+      ],
+      "docker" : {
+        "memory" : 10
+      }
     },
     {
       "id": "2",
@@ -94,7 +97,10 @@
           "input" : "5 5",
           "output" : "5"
         }
-      ]
+      ],
+      "docker" : {
+        "memory" : 10
+      }
     }
   ]
   

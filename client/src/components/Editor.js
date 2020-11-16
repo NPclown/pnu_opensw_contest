@@ -57,7 +57,6 @@ function Editor (props){
     e.preventDefault()
     try{
       var tmp = await Axios.post(`/run/execution`,{id : id, language:language.value, code:code, testcase:testcase});
-      console.log(tmp.data.data.items)
       props.setResultT({data: tmp.data.data.items, isLoading:false})
     } catch(error) {
       alert(error)

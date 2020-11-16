@@ -119,7 +119,7 @@ export default function SimpleAccordion(props) {
         <AccordionDetails>
           <Typography>
           <div className ={classes.Root171}>
-              <input className={classes.inputsize} value={memory} placeholder="메모리 사용량 (MB 단위)" onChange={e => setMemory(e.target.value)}></input>
+              <input className={classes.inputsize} value={memory} placeholder="메모리 사용량 (MB 단위, 숫자만 입력, 예시 : 10)" onChange={e => setMemory(e.target.value)}></input>
           </div>
           </Typography>
         </AccordionDetails>
