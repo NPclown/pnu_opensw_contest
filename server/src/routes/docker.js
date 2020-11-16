@@ -244,7 +244,7 @@ router.post('/execution', postValidator, async(req, res, next) =>{
             options.HostConfig = {
                 'Binds': [src + ':' + dis]
             }
-            options.HostConfig.Memory = 10485760*parseInt(workbook.docker.memory)
+            options.HostConfig.Memory = 1048576*(parseInt(workbook.docker.memory) < 10 ? 10 : parseInt(workbook.docker.memory))
 
             // complie
             if(language < 3){
@@ -407,7 +407,7 @@ router.post('/score', async(req, res, next) =>{
             options.HostConfig = {
                 'Binds': [src + ':' + dis]
             }
-            options.HostConfig.Memory = 10485760*parseInt(workbook.docker.memory)
+            options.HostConfig.Memory = 1048576*(parseInt(workbook.docker.memory) < 10 ? 10 : parseInt(workbook.docker.memory))
 
 
             // complie

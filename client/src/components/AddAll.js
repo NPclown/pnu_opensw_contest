@@ -114,7 +114,7 @@ export default function SimpleAccordion(props) {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className={classes.heading}>도커 사용량 제어</Typography>
+          <Typography className={classes.heading}>도커 메모리 사용량</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
