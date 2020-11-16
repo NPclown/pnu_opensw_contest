@@ -14,6 +14,7 @@
 - git clone 
 ```
 git clone https://github.com/NPclown/pnu_opensw_contest.git
+cd pnu_opensw_contest
 ```
 - 도커 이미지 다운로드
 
