@@ -13,15 +13,15 @@
 ### Linux / Mac
 - git clone 
 ```
-git clone https://github.com/NPclown/pnu_opensw_contest.git
-cd pnu_opensw_contest
+$ git clone https://github.com/NPclown/pnu_opensw_contest.git
+$ cd pnu_opensw_contest
 ```
 - 도커 이미지 다운로드
 
 ```
-cd server
-docker build -t compiler:1.0 .
-docker pull mongo
+$ cd server
+$ docker build -t compiler:1.0 .
+$ docker pull mongo
 ```
 - mongo db 실행
 
@@ -34,6 +34,7 @@ $ docker run -d -p 10017:27017 --name mongo-db \
 - dotEnv(.env) setting
 
 ```
+$ cd server
 $ cp env .env
 
 ```
