@@ -11,6 +11,10 @@
 ## 설치방법
 
 ### Linux / Mac
+- git clone 
+```
+git clone https://github.com/NPclown/pnu_opensw_contest.git
+```
 - 도커 이미지 다운로드
 
 ```
